@@ -9,7 +9,7 @@
         .outer{
         background-color: #0e332c;
         color:white;
-        width:800px;
+        width:700px;
         height:600px;
         margin:auto;
         margin-top:200px;
@@ -18,7 +18,7 @@
             font-weight:normal;
         }
         #enroll-com-form input{
-            width:600px;
+            width:500px;
             height:20px;
         }
         .comm{
@@ -57,9 +57,9 @@
                 </tr>
             </table>
             <h2 class="comm">코멘트</h2>
-            <textarea name="comment" cols="81" rows="10" class="comm" style="resize:none" required></textarea>
+            <textarea name="comment" cols="67" rows="10" class="comm" style="resize:none" required></textarea>
             <br><br><br>
-            <div align="right" style="width:700px">
+            <div align="right" style="width:600px">
                 <button type="reset" >취소</button>
                 <button type="submit" class="btn btn-outline-primary">등록</button>
             </div>

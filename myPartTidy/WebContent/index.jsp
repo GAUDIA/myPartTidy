@@ -42,8 +42,8 @@
 			<div id="content_1">
 				<a href="">NEW</a>
 				<a href="">RANK</a>
-				<a href="">SALE</a>
-				<a href="">FREE</a>
+				<a href="">게임사</a>
+				<a href="">게임사조회</a>
 			</div>
 			<div id="content_2">
 				<span id="content_game_1">
