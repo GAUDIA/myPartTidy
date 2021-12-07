@@ -1,62 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <style>
-        .outer2{
-            width: 1500px;
-            height: 350px;
-            margin: auto;
-        }
-  
-        .mainImg{
-            background: #587570;  
-            width: 1500px;
-            height: 330px;
-            margin-top:60px;
-        }
-        .mainImg>span{
-            width:30px;
-        }
-        span>a{
-            width:40px;
-            height:250px;
-        }
+<style>
+	.outer2{
+       width: 1500px;
+       height: 370px;
+       margin: auto;
+   }
 
-        #carouselExampleIndicators{
-            width: 100%;
-            height: 100%;
-        }
+   .mainImg{
+       background: #587570;  
+       width: 1200px;
+       height: 330px;
+       margin-top:60px;
+   }
+   .mainImg>span{
+       width:30px;
+   }
+   span>a{
+       width:40px;
+       height:250px;
+   }
 
-        .slideImg{
-            display: inline-block;
-            width:210px;
-            height:300px;
-            margin:5px;
-            border: 1px solid black;
+   #carouselExampleIndicators{
+       width: 100%;
+       height: 100%;
+   }
+
+   .slideImg{
+       display: inline-block;
+       width:210px;
+       height:320px;
+       margin:5px;
+       border: 1px solid black;
         }
+    .d-block{
+      width:210px;
+      height:320px;
+      object-fit:cover;
+      object-position: center;
+    }
 </style>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        
-
 </head>
-<body   style="background-color: #0e332c;">
-
-   <div class="outer2" align="center">
+<body style="background-color: #0e332c;">
+	<%@ include file="topbar.jsp" %>
+	<div class="outer2" align="center">
 
         <div class="mainImg">
             
@@ -70,7 +64,7 @@
                   <div class="carousel-item active">
                     <div class="slideImg" id="img1">
                         <a href="">
-                          <img src="/resources/image/unnamed.jpg" class="d-block w-100">
+                          <img src="<%=contextPath%>/resources/image/unnamed.jpg" class="d-block w-100">
                         </a>
                         
                     </div>
@@ -119,4 +113,5 @@
             
         </div>
    </div>
-
+</body>
+</html>

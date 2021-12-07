@@ -13,6 +13,8 @@
         height:100px;
         display:flex;
         justify-content:space-between;
+        margin:auto;
+        width:1500px;
     }
     .top-area div{
         display:table-cell;
@@ -36,7 +38,10 @@
         font-size:17px;
         font-weight:bold;
     }
-    #top2{margin:auto;}
+    #top2{
+    	margin-top:20px;
+    	margin-right:100px;
+    }
     #search_box{
         width:600px;
         height:30px;
@@ -55,7 +60,7 @@
     #top3{
         width:60px;
         margin-right:10px;
-        margin-top:10px;
+        margin-top:20px;
     }
     #usericon{padding-left:5px;}
     .top-area{background:#0e332c}
@@ -74,7 +79,7 @@
 <body>
 
     <div class="top-area">
-        <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
+        <div id="top1"><a href="<%=contextPath%>"><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
         <div id="top2" align="center">
             <form action="" id="search_form">
 
@@ -89,7 +94,7 @@
         </div>
         <div id="top3">
             <a href=""><i class="fas fa-shopping-cart fa-lg"></i></a>
-            <a href="" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            <a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
         </div>
     </div>
 
