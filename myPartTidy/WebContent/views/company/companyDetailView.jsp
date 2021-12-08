@@ -28,6 +28,11 @@
         width:600px;
         height:30px;
     }
+    #gametable{text-align:center; color:white;}
+    #gametable>tbody>tr:hover{
+        background:lightgrey;
+    	color:black;
+    }
 </style>
 </head>
 <body>
@@ -76,11 +81,59 @@
                     <td><p>기대되는 신생 게임 회사</p></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
+                <tr>
+                	<th><h4>제공게임</h4></th>
+                	<td></td>
+                </tr>
             </table>
+       		<table class="table table-sm thead-lignt" id="gametable">
+       			<thead>
+       				<th width="100">게임</th>
+       				<th width="100">출시일</th>
+       				<th width="100">장르</th>
+       				<th width="150">게임상세페이지</th>
+       			</thead>
+       			<tbody>
+       				<tr>
+       					<td colspan="4">등록된 게임이 없습니다</td>
+       				</tr>
+       				<tr>
+        				<td>A게임</td>
+        				<td>2021-12-08</td>
+        				<td>공포</td>
+        				<td><a href="" class="btn btn-sm btn-info">조회</a></td>	
+       				</tr>
+       				                				<tr>
+        				<td>A게임</td>
+        				<td>2021-12-08</td>
+        				<td>공포</td>
+        				<td><a href="" class="btn btn-sm btn-info">조회</a></td>	
+       				</tr>
+       				                				<tr>
+        				<td>A게임</td>
+        				<td>2021-12-08</td>
+        				<td>공포</td>
+        				<td><a href="" class="btn btn-sm btn-info">조회</a></td>	
+       				</tr>
+       				                				<tr>
+        				<td>A게임</td>
+        				<td>2021-12-08</td>
+        				<td>공포</td>
+        				<td><a href="" class="btn btn-sm btn-info">조회</a></td>	
+       				</tr>
+       				                				<tr>
+        				<td>A게임</td>
+        				<td>2021-12-08</td>
+        				<td>공포</td>
+        				<td><a href="" class="btn btn-sm btn-info">조회</a></td>	
+       				</tr>
+       			</tbody>
+       		</table>
 
-            <div align="right" style="width:700px">
-                <button type="reset" class="btn btn-secondary">취소</button>
-                <button type="submit" class="btn btn-info">등록</button>
+            <div align="right" style="width:1000px">
+                <button type="button" onclick="history.back();" class="btn btn-secondary">뒤로가기</button>
+                <button type="" class="btn btn-success">수정</button>
+                <button type="" class="btn btn-danger">삭제</button>
             </div>
 
         </form>
