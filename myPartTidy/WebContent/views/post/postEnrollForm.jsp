@@ -9,18 +9,22 @@
 	.outer{
 		background-color: #0e332c;
 		color:white;
-		width:1000px;
-		height:900px;
+		width:1200px;
+		height:1000px;
 		margin:auto;
 		margin-top:50px;
 	}
 	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
 	.write-form{
 	    background-color: lightgray;
-	    width:1000px;
+	    width:1100px;
 	    height:800px;
 	    margin:auto;
 	    margin-top:50px;
+	}
+	#enroll-form{
+		width:1000px;
+		margin:auto;
 	}
 	#enroll-form input, #enroll-form textarea{
 		width:100%;
@@ -48,7 +52,7 @@
                 <table>
                     <tr>
                         <th width="100"><h5>제목</h5></th>
-                        <td width="500" heigt="30"><input type="text" name="title" required></td>
+                        <td width="800" heigt="30"><input type="text" name="title" required></td>
                     </tr>
                     <tr><td colspan=2 height="20"></td></tr>
                     <tr>
@@ -57,7 +61,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <textarea rows="20" name="content" style="resize:none" required></textarea>
+                            <textarea rows="21" name="content" style="resize:none" required></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -65,8 +69,8 @@
                     	<td><input type="file" name="upfile"></td>
                     </tr>
                 </table>
-                <br><br>
-                <div align="right" style="width:800px">
+                <br>
+                <div align="right" style="width:950px">
                     <button type="button" onclick="history.back();" class="btn btn-secondary">뒤로가기</button>
                     <button type="reset" class="btn btn-info">취소</button>
                     <button type="submit" class="btn btn-success">등록</button>

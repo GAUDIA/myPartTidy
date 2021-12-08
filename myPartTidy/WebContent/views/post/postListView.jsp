@@ -19,10 +19,11 @@
 	table {text-align:center;}
 	#table{color:white;}
 	tbody>tr:hover{
-    	background:lightgrey;
+    	background:lightgray;
     	color:black;
     	cursor:pointer;
     }
+    #submitbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -38,14 +39,14 @@
 
             <div id="deletebtn" align="right" style="width:1200px;">
                 <!--관리자계정에서만보이는 버튼-->
-                <a href="" class="btn btn-danger">삭제</a>
+                <a href="" class="btn btn-sm btn-danger">삭제</a>
                 <!-- 로그인 시에만 보이는 버튼 -->
-                <a href="<%= contextPath %>/enrollForm.po" class="btn btn-secondary">글작성</a>
+                <a href="<%= contextPath %>/enroll.po" class="btn btn-sm btn-info">글작성</a>
             </div>
 
             <br>
 
-            <table align="center" style="font-size: 12pt" class="table" id="table">
+            <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
                 <thead>
                     <!--체크박스 ; 관리자만 보이게-->
                     <th><input type="checkbox"></th>
@@ -69,6 +70,51 @@
                         <td>제목 제목 이것은 제목입니다</td>
                         <td>1</td>
                         <td>0</td>
+                        <td>2021-12-05</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>12423534</td>
+                        <td>라랄라라라</td>
+                        <td>제목 제목 이것은 제목입니다</td>
+                        <td>235239432</td>
+                        <td>12849102</td>
+                        <td>2021-12-05</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>12423534</td>
+                        <td>라랄라라라</td>
+                        <td>제목 제목 이것은 제목입니다</td>
+                        <td>235239432</td>
+                        <td>12849102</td>
+                        <td>2021-12-05</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>12423534</td>
+                        <td>라랄라라라</td>
+                        <td>제목 제목 이것은 제목입니다</td>
+                        <td>235239432</td>
+                        <td>12849102</td>
+                        <td>2021-12-05</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>12423534</td>
+                        <td>라랄라라라</td>
+                        <td>제목 제목 이것은 제목입니다</td>
+                        <td>235239432</td>
+                        <td>12849102</td>
+                        <td>2021-12-05</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>12423534</td>
+                        <td>라랄라라라</td>
+                        <td>제목 제목 이것은 제목입니다</td>
+                        <td>235239432</td>
+                        <td>12849102</td>
                         <td>2021-12-05</td>
                     </tr>
                     <tr>
@@ -177,14 +223,15 @@
             <br><br>
 
             <div class="search-area" align="center">
-
-                <select name="" id="" style="height:30px;">
-                    <option value="">조회순</option>
-                    <option value="">추천순</option>
-                    <option value="">닉네임</option>
-                </select>
-                <input type="text" style="width:500px; height:30px;">
-                <input type="submit" value="검색">
+				<form>
+	                <select name="" id="" style="height:30px;">
+	                    <option value="">조회순</option>
+	                    <option value="">추천순</option>
+	                    <option value="">닉네임</option>
+	                </select>
+	                <input type="text" style="width:500px; height:30px;">
+	                <button type="submit" id="submitbtn"><i class="fas fa-search"></i></button>		
+				</form>
 
 
             </div>

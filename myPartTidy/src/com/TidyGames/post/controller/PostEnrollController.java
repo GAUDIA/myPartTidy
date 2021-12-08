@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PostListController
+ * Servlet implementation class PostEnrollController
  */
-@WebServlet("/list.po")
-public class PostListController extends HttpServlet {
+@WebServlet("/enroll.po")
+public class PostEnrollController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostListController() {
+    public PostEnrollController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,9 @@ public class PostListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("views/post/postListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/post/postEnrollForm.jsp").forward(request, response);
+
+		
 		
 	}
 

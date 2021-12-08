@@ -29,6 +29,7 @@
 	}
 	table {text-align:center;}
 	#table{color:white;}
+	#submitbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -168,8 +169,10 @@
 	    <br><br>
 	    
 		<div class="search-area" align="center">
-			<input type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
-		    <input type="submit" value="검색">		
+			<form>
+				<input type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
+			    <button type="submit" id="submitbtn"><i class="fas fa-search"></i></button>			
+			</form>
 		</div>
 
 	</div>
