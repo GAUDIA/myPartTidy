@@ -8,10 +8,7 @@
 <style>
 	#listco{color:orange;}
 	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
-    .bar{
-       float:left;
-       margin-left:5px;
-    }
+    .bar{float:left;}
     .outer{
 	    background-color: #0e332c;
 	    color:white;

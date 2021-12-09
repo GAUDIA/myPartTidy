@@ -18,10 +18,7 @@
     }
     h2{font-weight:normal;}
     .navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
-    .bar{
-       float:left;
-       margin-left:5px;
-    }
+    .bar{float:left;}
     #enroll-com-form input{
         width:600px;
         height:30px;
