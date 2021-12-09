@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CompanyDetailViewController
+ * Servlet implementation class CompanyListController
  */
-@WebServlet("/detail.co")
-public class CompanyDetailViewController extends HttpServlet {
+@WebServlet("/list.co")
+public class CompanyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompanyDetailViewController() {
+    public CompanyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class CompanyDetailViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("views/company/companyDetailView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/company/companyListView.jsp").forward(request, response);
 		
 	}
 

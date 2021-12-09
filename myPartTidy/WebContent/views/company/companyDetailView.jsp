@@ -51,7 +51,7 @@
 	    
 
         <h2>게임사 상세 조회</h2>
-        <br><br><br>
+        <br><br>
 
         <form action="" method="post" id="enroll-com-form">
 
@@ -60,32 +60,33 @@
                     <th width="100"><h4>게임사</h4></th>
                     <td><h5>보람게임즈</h5></td>
                 </tr>
-                <tr><td colspan=2 height="10"></td></tr>
+                <tr><td colspan=2 height="20"></td></tr>
                 <tr>
                     <th><h4>아이디</h4></th>
                     <td><h5>BoramGames</h5></td>
                 </tr>
-                <tr><td colspan=2 height="10"></td></tr>
+                <tr><td colspan=2 height="20"></td></tr>
                 <tr>
                     <th><h4>등록코드</h4></th>
                     <td><h5>vkEnsKl</h5></td>
                 </tr>
-                <tr><td colspan=2 height="10"></td></tr>
+                <tr><td colspan=2 height="20"></td></tr>
                 <tr>
                     <th><h4>대표자</h4></th>
                     <td><h5>보람강</h5></td>
                 </tr>
-                <tr><td colspan=2 height="10"></td></tr>
+                <tr><td colspan=2 height="20"></td></tr>
                 <tr>
                     <th style="display: flow-root;"><h4>코멘트</h4></th>
                     <td><p>기대되는 신생 게임 회사</p></td>
                 </tr>
-                <tr><td colspan=2 height="10"></td></tr>
+                <tr><td colspan=2 height="20"></td></tr>
                 <tr>
                 	<th><h4>제공게임</h4></th>
                 	<td></td>
                 </tr>
             </table>
+            <br>
        		<table class="table table-sm thead-lignt" id="gametable">
        			<thead>
        				<th width="100">게임</th>
@@ -142,11 +143,10 @@
 		        <button> &gt; </button>
 		    </div>
 
-			<br>
             <div align="right" style="width:1000px">
-                <button type="button" onclick="history.back();" class="btn btn-secondary">뒤로가기</button>
-                <a href="" class="btn btn-success">수정</a>
-                <a href="" class="btn btn-danger">삭제</a>
+                <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
+                <a href="" class="btn btn-sm btn-success">수정</a>
+                <a href="" class="btn btn-sm btn-danger">삭제</a>
             </div>
 
         </form>

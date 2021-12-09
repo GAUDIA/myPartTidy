@@ -1,4 +1,4 @@
-package com.TidyGames.company.controller;
+package com.TidyGames.post.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CompanyListViewController
+ * Servlet implementation class PostEnrollFormController
  */
-@WebServlet("/list.co")
-public class CompanyListViewController extends HttpServlet {
+@WebServlet("/enroll.po")
+public class PostEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompanyListViewController() {
+    public PostEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,8 @@ public class CompanyListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("views/company/companyListView.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("views/post/postEnrollForm.jsp").forward(request, response);
 		
 	}
 
