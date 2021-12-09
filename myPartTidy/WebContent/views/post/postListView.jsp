@@ -47,9 +47,10 @@
             <br>
 
             <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
+
                 <thead>
                     <!--체크박스 ; 관리자만 보이게-->
-                    <th><input type="checkbox"></th>
+                    <th><input type="checkbox" id="check1"></th>
                     <th width="100">글번호</th>
                     <th width="200">작성자</th>
                     <th width="500">제목</th>
@@ -239,6 +240,18 @@
         </form>
 
     </div>
+
+
+    <script>
+        $("#check1").change(function(){
+            const table = $("#table");
+            if($(this).is(":checked")){
+                $(":checkbox", table).attr("checked", "checked");
+            }else {
+                $(":checkbox", table).removeAttr("checked");
+            }
+        })
+    </script>
 
 </body>
 </html>
