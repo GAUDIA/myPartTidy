@@ -22,6 +22,7 @@
     	background:lightgray;
     	color:black;
     	cursor:pointer;
+    	opacity:0.7;
     }
     #submitbtn{color:white; background:#0e332c; border:none;}
 </style>
@@ -243,14 +244,15 @@
 
 
     <script>
-        $("#check1").change(function(){
-            const table = $("#table");
-            if($(this).is(":checked")){
-                $(":checkbox", table).attr("checked", "checked");
-            }else {
-                $(":checkbox", table).removeAttr("checked");
-            }
-        })
+    	$(function(){
+	        $("#check1").click(function(){
+	            if($(this).is(":checked")){
+	                $(":checkbox", $("table")).prop("checked", true);
+	            }else {
+	                $(":checkbox", $("table")).prop("checked", false);
+	            }
+	        })
+    	})
     </script>
 
 </body>

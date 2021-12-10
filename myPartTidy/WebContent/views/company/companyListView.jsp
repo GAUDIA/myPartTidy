@@ -29,6 +29,7 @@
 	#table>tbody>tr:hover{
         background:lightgrey;
     	color:black;
+    	opacity:0.9;
     }
 	#searchbtn{color:white; background:#0e332c; border:none;}
 </style>
