@@ -58,7 +58,7 @@
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
                     <th><h4>등록코드</h4></th>
-                    <td><h6 style="color:lightgray;">&nbsp;&nbsp;등록코드는 등록시 자동으로 부여됩니다</h6></td>
+                    <td><p><h5>vkEnsKl</h5></p></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>

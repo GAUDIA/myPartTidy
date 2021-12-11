@@ -142,7 +142,7 @@
 
             <div align="right" style="width:1000px">
                 <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
-                <a href="" class="btn btn-sm btn-success">수정</a>
+                <a href="<%= contextPath %>/updateform.co" class="btn btn-sm btn-success">수정</a>
                 <a href="" class="btn btn-sm btn-danger">삭제</a>
             </div>
 

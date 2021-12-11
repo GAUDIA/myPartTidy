@@ -164,19 +164,6 @@
 	</div>
 	
 	
-    <script>
-    	$(document).ready(function(){
-    		
-    		if($("#allcheck").checked="true"){
-    			$(".check").checked="true";
-    		}else{
-    			$(".check").checked="false";
-    		}
-    		
-    	});
-    </script>
-	
-	
 	
 </body>
 </html>
