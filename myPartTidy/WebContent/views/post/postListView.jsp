@@ -22,7 +22,7 @@
     	background:lightgray;
     	color:black;
     	cursor:pointer;
-    	opacity:0.7;
+    	opacity:0.9;
     }
     #submitbtn{color:white; background:#0e332c; border:none;}
 </style>
