@@ -45,9 +45,9 @@
         <h2>TIDY COMMUNITY  <i class="far fa-comments"></i></h2>
 		<br>
 		<div align="right">
-			<a href="" class="btn btn-sm btn-secondary">신고</a>
-			<a href="" class="btn btn-sm btn-secondary">신고</a>
-			<a href="" class="btn btn-sm btn-secondary">신고</a>
+			<a href="" class="btn btn-sm btn-warning">신고</a>
+			<a href="" class="btn btn-sm btn-info">수정</a>
+			<a href="" class="btn btn-sm btn-danger">삭제</a>
 		</div>
 		<br>
         <div class="view-form">
@@ -100,7 +100,7 @@
 					<table>
 						<tr>
 							<td></td>
-							<th style="display: flow-root" width="100">닉네임</th>
+							<th style="display: flow-root" width="70">닉네임</th>
 							<td><p width="500" size="auto">댓글 내용 자리...</p></td>
 							<td><a>수정</a></td>
 							<td><a>삭제</a></td>
