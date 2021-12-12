@@ -21,7 +21,6 @@
 	    background-color: lightgray;
 	    width:1200px;
 	    margin:auto;
-	    margin-top:50px;
 	}
 	#read-form{
 		margin:auto;
@@ -44,7 +43,13 @@
     <div class="outer">
 
         <h2>TIDY COMMUNITY  <i class="far fa-comments"></i></h2>
-
+		<br>
+		<div align="right">
+			<a href="" class="btn btn-sm btn-secondary">신고</a>
+			<a href="" class="btn btn-sm btn-secondary">신고</a>
+			<a href="" class="btn btn-sm btn-secondary">신고</a>
+		</div>
+		<br>
         <div class="view-form">
 			<br><br>
             <div id="read-form">
@@ -52,16 +57,10 @@
 				<div class="underline">
 					<table>
 						<tr>
-							<td colspan="8"></td>
-							<td width="300"></td>
-							<td><a href="" class="btn btn-sm btn-secondary">신고</a></td>
-						</tr>
-						<tr>
 							<th width="60"><h5>제목</h5></th>
 							<td colspan="7"><h6>이곳은 제목 들어갈 자리</h6></td>
-							<td colspan="2"></td>
 						</tr>
-						<tr><td colspan="10" height="20"></td></tr>
+						<tr><td colspan="8" height="20"></td></tr>
 						<tr>
 							<th width="60">작성자</th>
 							<td width="150">작성자입니다</td>
@@ -71,9 +70,8 @@
 							<td width="80">123</td>
 							<th width="70">추천수</th>
 							<td width="80">456</td>
-							<td colspan="2"></td>
 						</tr>
-						<tr><td colspan="10" height="20"></td></tr>
+						<tr><td colspan="8" height="20"></td></tr>
 					</table>
 				</div>
 
@@ -115,10 +113,10 @@
         </div>
     </div>
 	<br>
-	<div align="right" style="width:950px">
-		<button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
-		<button type="reset" class="btn btn-sm btn-info">취소</button>
-		<button type="submit" class="btn btn-sm btn-success">등록</button>
+	<div align="center">
+		<a href="" class="btn btn-sm btn-secondary">이전글</a>
+		<a href="" class="btn btn-sm btn-secondary">목록</a>
+		<a href="" class="btn btn-sm btn-secondary">다음글</a>
 	</div>
 	<br><br>
 </body>
