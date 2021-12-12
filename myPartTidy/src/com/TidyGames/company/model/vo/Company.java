@@ -27,6 +27,16 @@ public class Company {
 		this.companyStatus = companyStatus;
 		this.companyId = companyId;
 	}
+	
+	// 게임사 목록 조회용 매개변수 생성자
+	public Company(int companyNo, String companyName, String companyId, String companyPwd, Date companyEnroll) {
+		super();
+		this.companyNo = companyNo;
+		this.companyName = companyName;
+		this.companyId = companyId;
+		this.companyPwd = companyPwd;
+		this.companyEnroll = companyEnroll;
+	}
 
 	public int getCompanyNo() {
 		return companyNo;

@@ -28,5 +28,18 @@
 		  , ?
 		  )
 	</entry>
+	
+	<entry key="selectCompanyList">
+		SELECT 
+		       COMPANY_NO
+		     , COMPANY_NAME
+		     , COMPANY_ID
+		     , COMPANY_PWD
+		     , COMPANY_ENROLL
+		  FROM COMPANY
+		 WHERE COMPANY_STATUS = 'Y'
+		 ORDER
+		    BY COMPANY_NO DESC
+	</entry>
 
 </properties>

@@ -1,10 +1,15 @@
 package com.TidyGames.company.model.service;
 
-import com.TidyGames.company.model.dao.CompanyDao;
-import com.TidyGames.company.model.vo.Company;
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.close;
+import static com.TidyGames.common.JDBCTemplate.commit;
+import static com.TidyGames.common.JDBCTemplate.getConnection;
+import static com.TidyGames.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
+import com.TidyGames.company.model.dao.CompanyDao;
+import com.TidyGames.company.model.vo.Company;
 
 public class CompanyService {
 	
@@ -25,5 +30,39 @@ public class CompanyService {
 		close(conn);
 		return result;
 	}
+	
+	/**
+	 * 게임사 목록 조회
+	 * @return
+	 */
+	public ArrayList<Company> selectCompanyList(){	
+		Connection conn = getConnection();
+		ArrayList<Company> list = new CompanyDao().selectCompanyList(conn);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

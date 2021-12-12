@@ -1,12 +1,15 @@
 package com.TidyGames.company.model.dao;
 
+import static com.TidyGames.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
-import static com.TidyGames.common.JDBCTemplate.*;
 
 import com.TidyGames.company.model.vo.Company;
 
@@ -47,7 +50,6 @@ public class CompanyDao {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -55,5 +57,52 @@ public class CompanyDao {
 		
 		return result;
 	}
+	
+	public ArrayList<Company> selectCompanyList(Connection conn){
+		
+		ArrayList<Company> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCompanyList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Company(rset.getInt("company_no"),
+									 rset.getString("company_name"),
+									 rset.getString("company_id"),
+									 rset.getString("company_pwd"),
+									 rset.getDate("company_enroll")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
