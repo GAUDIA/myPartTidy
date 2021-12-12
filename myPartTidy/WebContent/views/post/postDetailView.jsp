@@ -100,8 +100,11 @@
 					<table>
 						<tr>
 							<td></td>
-							<th>닉네임</th>
-							<td></td>
+							<th style="display: flow-root" width="100">닉네임</th>
+							<td><p width="500" size="auto">댓글 내용 자리...</p></td>
+							<td><a>수정</a></td>
+							<td><a>삭제</a></td>
+							<td><a>신고</a></td>
 						</tr>
 					</table>
 				</div>
