@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.company.model.service.CompanyService;
+import com.TidyGames.company.model.service.AdminCompanyService;
 import com.TidyGames.company.model.vo.Company;
 
 /**
@@ -32,7 +32,7 @@ public class AdminCompanyListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Company> list = new CompanyService().selectCompanyList();
+		ArrayList<Company> list = new AdminCompanyService().selectCompanyList();
 		
 		request.setAttribute("list", list);
 		

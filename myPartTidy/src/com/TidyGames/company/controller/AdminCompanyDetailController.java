@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.company.model.service.AdminCompanyService;
+import com.TidyGames.company.model.vo.Company;
+
 /**
  * Servlet implementation class AdminCompanyDetailController
  */
@@ -27,7 +30,14 @@ public class AdminCompanyDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int companyNo = Integer.parseInt(request.getParameter("num"));
+		
+		Company c = new AdminCompanyService().selectCompanyDetail(companyNo);
+			
+		request.setAttribute("company", c);
 		request.getRequestDispatcher("views/company/adminCompanyDetailView.jsp").forward(request,response);
+			
+
 		
 	}
 

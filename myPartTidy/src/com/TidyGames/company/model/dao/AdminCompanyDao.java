@@ -13,13 +13,13 @@ import java.util.Properties;
 
 import com.TidyGames.company.model.vo.Company;
 
-public class CompanyDao {
+public class AdminCompanyDao {
 	
 	private Properties prop = new Properties(); // 전역변수 private
 
-	public CompanyDao() {
+	public AdminCompanyDao() {
 		
-		String filePath = CompanyDao.class.getResource("/db/sql/company-admin-mapper.xml").getPath();
+		String filePath = AdminCompanyDao.class.getResource("/db/sql/company-admin-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
@@ -58,6 +58,11 @@ public class CompanyDao {
 		return result;
 	}
 	
+	/**
+	 * 게임사 목록 조회
+	 * @param conn
+	 * @return
+	 */
 	public ArrayList<Company> selectCompanyList(Connection conn){
 		
 		ArrayList<Company> list = new ArrayList<>();
@@ -87,7 +92,36 @@ public class CompanyDao {
 	
 	
 	
-	
+	public Company selectCompanyDetail(Connection conn, int companyNo) {
+		
+		Company c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCompanyDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, companyNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Company();
+				c.setCompanyNo(rset.getInt("company_no"));
+				c.setCompanyName(rset.getString("company_name"));
+				c.setCompanyId(rset.getString("company_id"));
+				c.setCompanyPwd(rset.getString("company_pwd"));
+				c.setCompanyHead(rset.getString("company_head"));
+				c.setCompanyComment(rset.getString("company_comment"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+	}
 	
 	
 	

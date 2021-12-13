@@ -53,6 +53,7 @@
 	    <form action="">
             <table align="center" class="table table-sm table-bordered" id="table">
                 <thead>
+                	<th width="5">번호</th>
                     <th>게임사</th>
                     <th>아이디</th>
                     <th>등록코드</th>
@@ -62,15 +63,16 @@
                 <tbody>
                 	<% if(list.isEmpty()) { %>
 	                    <tr>    
-	                        <td colspan="5">조회된 게시글이 없습니다.</td>
+	                        <td colspan="6">조회된 게시글이 없습니다.</td>
 	                    </tr>
                     <% }else { %>
                     	<% for(Company c : list) { %>
 		                    <tr>
+		                    	<td><%=c.getCompanyNo()%></td>
 		                        <td><%=c.getCompanyName()%></td>
 		                        <td><%=c.getCompanyId()%></td>
 		                        <td><%=c.getCompanyPwd()%></td>
-		                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
+		                        <td><a class="btn btn-sm btn-info" id="detailbtn">조회</a></td>
 		                        <td><%=c.getCompanyEnroll()%></td>
 		                    </tr>
                     	<% } %>
@@ -110,6 +112,18 @@
 
 	</div>
 	
+	<script>
+		$(function(){
+			$("#detailbtn").click(function(){
+			
+				const num = $(this).children().eq(0).text();
+				
+				
+				location.href = '<%=contextPath%>/detail.co?num=' + num;
+
+			})
+		})
+	</script>
 	
 	
 </body>

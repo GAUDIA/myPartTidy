@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company"%>
+<%
+	Company c = (Company)request.getAttribute("company");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,27 +51,27 @@
            <table>
                <tr>
                    <th width="100"><h4>게임사</h4></th>
-                   <td><h5>보람게임즈</h5></td>
+                   <td><h5><%=c.getCompanyName()%></h5></td>
                </tr>
                <tr><td colspan=2 height="20"></td></tr>
                <tr>
                    <th><h4>아이디</h4></th>
-                   <td><h5>BoramGames</h5></td>
+                   <td><h5><%=c.getCompanyId()%></h5></td>
                </tr>
                <tr><td colspan=2 height="20"></td></tr>
                <tr>
                    <th><h4>등록코드</h4></th>
-                   <td><h5>vkEnsKl</h5></td>
+                   <td><h5><%=c.getCompanyPwd()%></h5></td>
                </tr>
                <tr><td colspan=2 height="20"></td></tr>
                <tr>
                    <th><h4>대표자</h4></th>
-                   <td><h5>보람강</h5></td>
+                   <td><h5><%=c.getCompanyHead()%></h5></td>
                </tr>
                <tr><td colspan=2 height="20"></td></tr>
                <tr>
                    <th style="display: flow-root;"><h4>코멘트</h4></th>
-                   <td><p>기대되는 신생 게임 회사</p></td>
+                   <td><p><%=c.getCompanyComment()%></p></td>
                </tr>
                <tr><td colspan=2 height="20"></td></tr>
                <tr>

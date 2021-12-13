@@ -8,10 +8,10 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.TidyGames.company.model.dao.CompanyDao;
+import com.TidyGames.company.model.dao.AdminCompanyDao;
 import com.TidyGames.company.model.vo.Company;
 
-public class CompanyService {
+public class AdminCompanyService {
 	
 	/**
 	 * 게임사 등록
@@ -20,7 +20,7 @@ public class CompanyService {
 	 */
 	public int insertCompany(Company c) {
 		Connection conn = getConnection();
-		int result = new CompanyDao().insertCompany(conn, c);
+		int result = new AdminCompanyDao().insertCompany(conn, c);
 		
 		if(result > 0) {
 			commit(conn);
@@ -37,13 +37,18 @@ public class CompanyService {
 	 */
 	public ArrayList<Company> selectCompanyList(){	
 		Connection conn = getConnection();
-		ArrayList<Company> list = new CompanyDao().selectCompanyList(conn);
+		ArrayList<Company> list = new AdminCompanyDao().selectCompanyList(conn);
 		close(conn);
 		return list;
 	}
 	
 	
-	
+	public Company selectCompanyDetail(int companyNo) {
+		Connection conn = getConnection();
+		Company c = new AdminCompanyDao().selectCompanyDetail(conn, companyNo);
+		close(conn);
+		return c;
+	}
 	
 	
 	
