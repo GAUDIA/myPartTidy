@@ -35,6 +35,9 @@
     	color:black;
     	opacity:0.9;
     }
+     .paging-area button{
+    	border:none;
+    }
 	#searchbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>

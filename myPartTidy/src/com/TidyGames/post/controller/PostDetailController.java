@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class PostDetailControlelr
  */
 @WebServlet("/detail.po")
-public class PostDetailControlelr extends HttpServlet {
+public class PostDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostDetailControlelr() {
+    public PostDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -27,6 +27,9 @@
     #title:hover{
     	text-decoration:underline;
     }
+    .paging-area button{
+    	border:none;
+    }
     #submitbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>
