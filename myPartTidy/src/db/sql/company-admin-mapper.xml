@@ -12,8 +12,6 @@
 		  , COMPANY_PWD
 		  , COMPANY_HEAD
 		  , COMPANY_COMMENT
-		  , COMPANY_ENROLL
-		  , COMPANY_STATUS
 		  , COMPANY_ID
 		  )
 		  VALUES
@@ -23,8 +21,6 @@
 		  , DBMS_RANDOM.STRING('A',7)
 		  , ?
 		  , ?
-		  , SYSDATE
-		  , 'Y'
 		  , ?
 		  )
 	</entry>
@@ -53,7 +49,35 @@
 		     , COMPANY_HEAD
 		     , COMPANY_COMMENT
 		  FROM COMPANY
-		 WHERE COMPANY_NO = ?;
+		 WHERE COMPANY_NO = ?
 	</entry>
+	
+	<entry key="updateCompany">
+		UPDATE
+		       COMPANY
+		   SET COMPANY_NAME = ?
+		     , COMPANY_ID = ?
+		     , COMPANY_HEAD = ?
+		     , COMPANY_COMMENT = ?
+		 WHERE COMPANY_NO = ?
+	</entry>
+
+	<entry key="deleteCompany">
+		UPDATE
+		       COMPANY
+		   SET COMPANY_STATUS = 'N'
+		 WHERE COMPANY_NO = ?
+	</entry>
+
+
+
+
+
+
+
+
+
+
+
 
 </properties>

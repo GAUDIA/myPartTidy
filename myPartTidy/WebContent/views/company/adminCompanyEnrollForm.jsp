@@ -25,7 +25,7 @@
     }
 	#enroll-area{
 		margin-top:50px;
-		margin-left:200px;
+		margin-left:150px;
 	}
 	#enroll-form input{
         width:600px;
@@ -84,7 +84,7 @@
 	                <button type="submit" class="btn btn-info">등록</button>
 	            </div>
 
-        </form>
+        	</form>
 
         </div>
 

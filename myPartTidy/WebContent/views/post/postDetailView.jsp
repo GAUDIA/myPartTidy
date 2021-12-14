@@ -21,6 +21,7 @@
 		margin:auto;
 		margin-top:50px;
 	}
+	.underline{border-bottom:2px solid rgba(83, 79, 79, 0.333);}
 	.view-form{
 		size:auto;
 	    background-color: lightgray;

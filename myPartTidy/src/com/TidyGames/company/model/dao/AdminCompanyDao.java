@@ -91,7 +91,12 @@ public class AdminCompanyDao {
 	}
 	
 	
-	
+	/**
+	 * 게임사 상세 조회
+	 * @param conn
+	 * @param companyNo
+	 * @return
+	 */
 	public Company selectCompanyDetail(Connection conn, int companyNo) {
 		
 		Company c = null;
@@ -123,8 +128,50 @@ public class AdminCompanyDao {
 		return c;
 	}
 	
+	/**
+	 * 게임사 정보 수정
+	 * @param conn
+	 * @param c
+	 * @return
+	 */
+	public int updateCompany(Connection conn, Company c) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateCompany");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getCompanyName());
+			pstmt.setString(2, c.getCompanyId());
+			pstmt.setString(3, c.getCompanyHead());
+			pstmt.setString(4, c.getCompanyComment());
+			pstmt.setInt(5, c.getCompanyNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
-	
+	public int deleteCompany(Connection conn, int companyNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCompany");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, companyNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
