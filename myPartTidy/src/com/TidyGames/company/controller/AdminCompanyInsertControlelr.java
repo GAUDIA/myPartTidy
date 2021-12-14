@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.company.model.service.CompanyService;
+import com.TidyGames.company.model.service.AdminCompanyService;
 import com.TidyGames.company.model.vo.Company;
 
 /**
@@ -42,7 +42,7 @@ public class AdminCompanyInsertControlelr extends HttpServlet {
 		c.setCompanyHead(companyHead);
 		c.setCompanyComment(companyComment);
 		
-		int result = new CompanyService().insertCompany(c);
+		int result = new AdminCompanyService().insertCompany(c);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "게임사 등록 완료!");
