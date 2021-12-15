@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
         box-sizing: border-box;
@@ -17,7 +17,7 @@
         float:left;
     }
     #intro{
-        font-size: 30px;
+        font-size: 33px;
         font-weight: 900;
         color :white;
         margin: 30px 80px 0px 50px;
@@ -28,17 +28,20 @@
         background: rgba(255, 255, 255, 0.555);
     }
     #line_3{
-        width:200px;
+        width:145px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
     }
+    /* 여기까지 공통 적용 */
+
     #profileBox{
-        border:1px solid black;
+        border:3px solid black;
         background: rgba(0, 0, 0, 0.300);
         width:700px;
         height:360px;
         margin-top: 80px; 
         margin-left: 190px;
+        /*총 길이 : 1500, 센터 : (750 - box)/2 => margin-left*/
     }
     #profileBox>*{
         float: left;
@@ -69,22 +72,23 @@
         margin: 50px 0px 0px 0px;
         text-decoration: none;
     }
-    #edit>a:hover{
+    #edit>a:hover, #edit>span:hover{
         text-decoration: none;
         color: rgba(255, 166, 0, 0.777); 
     }
-    
-
-
+    #edit>span{
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.589);
+        cursor: pointer;
+    }
 
 </style>
 </head>
-<body>
+<body style="background:#0e332c;">
     
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
    
-    
     <div id="outer">
         <div id="line_1"></div>
         <div>
@@ -108,13 +112,22 @@
                     <label id="nick">NickName</label> <br>
                     <label id="id">userId</label>
                     <div id="edit">
-                        <a href="">>> edit profile</a>
+                        <a href="views/member/updateUserCheck.jsp">>> 내 정보 수정</a> <br>
+                        <!--<a href="<%= contextPath %>/logout.me">>> 로그아웃</a>-->
+                        <span onclick="logout();">>> 로그아웃</span>
                     </div>
                     
                 </div>
             </div>
 
         </div>
+        <script>
+            function logout(){
+            	if(confirm("로그아웃 하시겠습니까?")) {
+           	 		location.href = "<%= contextPath%>/logout.me";
+            	} 
+            }
+        </script>
 
     </div>
 </body>
