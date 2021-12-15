@@ -91,6 +91,40 @@ public class AdminCompanyDao {
 		return list;
 	}
 	
+	/**
+	 * 게임사 검색 결과 조회
+	 * @param conn
+	 * @param companyName
+	 * @return
+	 */
+	public ArrayList<Company> searchCompany(Connection conn, String companyName){
+			
+			ArrayList<Company> searchList = new ArrayList<>();
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("searchCompany");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, companyName);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					searchList.add(new Company(rset.getInt("company_no"),
+										 	   rset.getString("company_name"),
+										 	   rset.getString("company_id"),
+										 	   rset.getString("company_pwd"),
+										 	   rset.getDate("company_enroll")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return searchList;
+		}
+		
 	
 	/**
 	 * 게임사 상세 조회
@@ -180,9 +214,14 @@ public class AdminCompanyDao {
 		return result;
 	}
 	
-	
-	public Game selectGameList(Connection conn, int companyNo) {
-		Game g = null;
+	/**
+	 * 게임사 제공 게임 목록 조회
+	 * @param conn
+	 * @param companyNo
+	 * @return
+	 */
+	public ArrayList<Game> selectGameList(Connection conn, int companyNo) {
+		ArrayList<Game> gameList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectGameList");
@@ -193,11 +232,13 @@ public class AdminCompanyDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				g = new Game();
+				Game g = new Game();
 				g.setGameNo(rset.getInt("game_no"));
 				g.setKorName(rset.getString("kor_name"));
-				g.setReleaseDate(rset.getString("releaseDate"));
-				g.setUploadDate(rset.getString("uploadDate"));
+				g.setEngName(rset.getString("eng_name"));
+				g.setReleaseDate(rset.getString("release_date"));
+				g.setUploadDate(rset.getString("upload_date"));
+				gameList.add(g);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -206,7 +247,7 @@ public class AdminCompanyDao {
 			close(pstmt);
 		}
 		
-		return g;
+		return gameList;
 	}
 	
 	

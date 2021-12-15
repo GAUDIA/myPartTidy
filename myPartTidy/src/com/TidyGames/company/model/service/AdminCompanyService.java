@@ -44,6 +44,18 @@ public class AdminCompanyService {
 	}
 	
 	/**
+	 * 게임사 검색 결과 조회
+	 * @param companyName
+	 * @return
+	 */
+	public ArrayList<Company> searchCompany(String companyName) {
+		Connection conn = getConnection();
+		ArrayList<Company> searchList = new AdminCompanyDao().searchCompany(conn, companyName);
+		close(conn);
+		return searchList;
+	}
+	
+	/**
 	 * 게임사 상세 조회
 	 * @param companyNo
 	 * @return
@@ -92,11 +104,11 @@ public class AdminCompanyService {
 	 * @param companyNo
 	 * @return
 	 */
-	public Game selectGameList(int companyNo) {
+	public ArrayList<Game> selectGameList(int companyNo) {
 		Connection conn = getConnection();
-		Game g = new AdminCompanyDao().selectGameList(conn, companyNo);
+		ArrayList<Game> gameList = new AdminCompanyDao().selectGameList(conn, companyNo);
 		close(conn);
-		return g;
+		return gameList;
 	}
 	
 	

@@ -62,7 +62,7 @@
 		<div class="list-area">
 		    <h2>게임사 목록 조회</h2>
 		    <br>
-		    <h6>* 클릭시 상세조회 창으로 넘어갑니다</h6>
+		    <h6>* 클릭시 상세조회 창으로 이동합니다</h6>
 		    <br>
 		    <form action="">
 	            <table class="table table-sm table-bordered" id="tbl">
@@ -116,8 +116,8 @@
 		    <br><br>
 		    
 			<div class="search-area" align="center">
-				<form>
-					<input type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
+				<form action="<%=contextPath%>/search.co" method="get">
+					<input name="companyName" type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
 				    <button type="submit" id="searchbtn"><i class="fas fa-search"></i></button>			
 				</form>
 			</div>
