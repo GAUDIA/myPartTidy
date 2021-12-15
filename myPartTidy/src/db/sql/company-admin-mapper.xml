@@ -52,6 +52,7 @@
 		 WHERE COMPANY_NO = ?
 	</entry>
 	
+	<!-- 게임사 수정 -->
 	<entry key="updateCompany">
 		UPDATE
 		       COMPANY
@@ -62,6 +63,7 @@
 		 WHERE COMPANY_NO = ?
 	</entry>
 
+	<!-- 게임사 삭제 -->
 	<entry key="deleteCompany">
 		UPDATE
 		       COMPANY
@@ -69,6 +71,18 @@
 		 WHERE COMPANY_NO = ?
 	</entry>
 
+	<entry key="selectGameList">
+		SELECT
+		       GAME_NO
+		     , KOR_NAME
+		     , TO_CHAR(RELEASE_DATE, 'YY/MM/DD') "RELEASE_DATE"
+		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD') "UPLOAD_DATE"
+		  FROM GAME
+		 WHERE GAME_STATUS = 'Y'
+		   AND COMPANY_NO = ?
+		 ORDER
+		    BY GAME_NO DESC
+	</entry>
 
 
 

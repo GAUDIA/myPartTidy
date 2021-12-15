@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.company.model.service.AdminCompanyService;
 import com.TidyGames.company.model.vo.Company;
+import com.TidyGames.game.model.vo.Game;
 
 /**
  * Servlet implementation class AdminCompanyDetailController
@@ -33,8 +34,10 @@ public class AdminCompanyDetailController extends HttpServlet {
 		int companyNo = Integer.parseInt(request.getParameter("num"));
 		
 		Company c = new AdminCompanyService().selectCompanyDetail(companyNo);
+		Game g = new AdminCompanyService().selectGameList(companyNo);
 			
 		request.setAttribute("company", c);
+		request.setAttribute("game", g);
 		request.getRequestDispatcher("views/company/adminCompanyDetailView.jsp").forward(request,response);
 			
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.TidyGames.company.model.dao.AdminCompanyDao;
 import com.TidyGames.company.model.vo.Company;
+import com.TidyGames.game.model.vo.Game;
 
 public class AdminCompanyService {
 	
@@ -84,6 +85,18 @@ public class AdminCompanyService {
 			rollback(conn);
 		}
 		return result;
+	}
+
+	/**
+	 * 게임사 제공 게임 리스트 조회
+	 * @param companyNo
+	 * @return
+	 */
+	public Game selectGameList(int companyNo) {
+		Connection conn = getConnection();
+		Game g = new AdminCompanyDao().selectGameList(conn, companyNo);
+		close(conn);
+		return g;
 	}
 	
 	

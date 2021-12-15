@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.TidyGames.company.model.vo.Company;
+import com.TidyGames.game.model.vo.Game;
 
 public class AdminCompanyDao {
 	
@@ -156,6 +157,12 @@ public class AdminCompanyDao {
 		return result;
 	}
 	
+	/**
+	 * 게임사 삭제
+	 * @param conn
+	 * @param companyNo
+	 * @return
+	 */
 	public int deleteCompany(Connection conn, int companyNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -173,6 +180,34 @@ public class AdminCompanyDao {
 		return result;
 	}
 	
+	
+	public Game selectGameList(Connection conn, int companyNo) {
+		Game g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectGameList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, companyNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				g = new Game();
+				g.setGameNo(rset.getInt("game_no"));
+				g.setKorName(rset.getString("kor_name"));
+				g.setReleaseDate(rset.getString("releaseDate"));
+				g.setUploadDate(rset.getString("uploadDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return g;
+	}
 	
 	
 	

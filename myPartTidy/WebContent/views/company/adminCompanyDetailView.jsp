@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company"%>
+	pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company, com.TidyGames.game.model.vo.Game"%>
 <%
 	Company c = (Company)request.getAttribute("company");
+	Game g = (Game)request.getAttribute("game");
 %>
 <!DOCTYPE html>
 <html>
@@ -122,68 +123,20 @@ div {
 			<div class="gametb" style="size: auto">
 				<table class="table table-sm" id="gametable">
 					<thead style="background: rgb(80, 88, 83)">
-						<th width="100">게임</th>
+						<th width="100">게임넘버</th>
+						<th width="100">게임명</th>
 						<th width="100">출시일</th>
-						<th width="100">장르</th>
-						<th width="150">게임상세페이지</th>
+						<th width="100">등록일</th>
 					</thead>
 					<tbody>
 						<tr>
 							<td colspan="4">등록된 게임이 없습니다</td>
 						</tr>
 						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
+							<td><%=g.getGameNo()%></td>
+							<td><%=g.getKorName()%></td>
+							<td><%=g.getReleaseDate()%></td>
+							<td><%=g.getUploadDate()%></td>
 						</tr>
 					</tbody>
 				</table>
