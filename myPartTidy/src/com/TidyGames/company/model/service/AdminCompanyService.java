@@ -8,6 +8,7 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.company.model.dao.AdminCompanyDao;
 import com.TidyGames.company.model.vo.Company;
 import com.TidyGames.game.model.vo.Game;
@@ -33,12 +34,23 @@ public class AdminCompanyService {
 	}
 	
 	/**
+	 * 게임사 리스트 수
+	 * @return
+	 */
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new AdminCompanyDao().selectListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	/**
 	 * 게임사 목록 조회
 	 * @return
 	 */
-	public ArrayList<Company> selectCompanyList(){	
+	public ArrayList<Company> selectCompanyList(PageInfo pi){	
 		Connection conn = getConnection();
-		ArrayList<Company> list = new AdminCompanyDao().selectCompanyList(conn);
+		ArrayList<Company> list = new AdminCompanyDao().selectCompanyList(conn, pi);
 		close(conn);
 		return list;
 	}
@@ -91,6 +103,7 @@ public class AdminCompanyService {
 	public int deleteCompany(int companyNo) {
 		Connection conn = getConnection();
 		int result = new AdminCompanyDao().deleteCompany(conn, companyNo);
+		
 		if(result>0) {
 			commit(conn);
 		}else {
