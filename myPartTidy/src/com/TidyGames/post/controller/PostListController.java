@@ -27,6 +27,8 @@ public class PostListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
 		request.getRequestDispatcher("views/post/postListView.jsp").forward(request, response);
 		
 	}

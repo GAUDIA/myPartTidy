@@ -37,7 +37,6 @@ public class MemberLoginController extends HttpServlet {
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		// 사용자가 입력한 userId, userPwd가 일치하면 loginUser에 select한 Member객체의 값이 담겨있고,
 		// 일치하지 않으면 loginUser에 null이 담겨있다.
-		System.out.println(loginUser);
 	
 		if(loginUser == null) {
 			// "아이디 비번 확인" 알람창 띄운 뒤 로그인창 재 로딩

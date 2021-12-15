@@ -52,10 +52,12 @@
         <form action="">
 
             <div id="deletebtn" align="right" style="width:1200px;">
-                <!--관리자계정에서만보이는 버튼-->
-                <a href="" class="btn btn-sm btn-danger">삭제</a>
-                <!-- 로그인 시에만 보이는 버튼 -->
-                <a href="<%= contextPath %>/enroll.po" class="btn btn-sm btn-info">글작성</a>
+                <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+                	<a href="" class="btn btn-sm btn-danger">삭제</a>
+                <% } %>
+                <% if(loginUser != null) { %> <!-- 블락된 회원은 못 보게 -->
+                	<a href="<%= contextPath %>/enroll.po" class="btn btn-sm btn-info">글작성</a>
+            	<% } %>
             </div>
 
             <br>
@@ -63,8 +65,9 @@
             <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
 
                 <thead>
-                    <!--체크박스 ; 관리자만 보이게-->
-                    <th><input type="checkbox" id="check1"></th>
+                    <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+                    	<th><input type="checkbox" id="check1"></th>
+                    <% } %>
                     <th width="100">글번호</th>
                     <th width="200">작성자</th>
                     <th width="500">제목</th>
@@ -79,138 +82,14 @@
                     </tr>
                     <!--게시물 있을 경우-->
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+                       		<td><input type="checkbox"></td>
+                        <% } %>
                         <td>15</td>
                         <td>라랄라라라</td>
                         <td id="title">제목 제목 이것은 제목입니다</td>
                         <td>1</td>
                         <td>0</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
                         <td>2021-12-05</td>
                     </tr>
                 </tbody>
