@@ -46,7 +46,7 @@
 		     , POST_WRITER
 		     , POST_NAME
 		     , MEM_NICK
-		     , TO_CHAR(POST_MODIFY, 'YY/MM/DD HH24:mm:SS') "POST_MODIFY"
+		     , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD HH24:mm:SS') "POST_MODIFY"
 		     , POST_VIEW
 		     , POST_LIKE
 		     , POST_CONTENT
