@@ -32,6 +32,28 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="increaseCount">
+		UPDATE
+		       POST
+		   SET POST_VIEW = POST_VIEW+1
+		 WHERE POST_NO = ?
+		   AND POST_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectPostDetail">
+		SELECT
+		       POST_NO
+		     , POST_WRITER
+		     , POST_NAME
+		     , MEM_NICK
+		     , TO_CHAR(POST_MODIFY, 'YY/MM/DD HH24:mm:SS') "POST_MODIFY"
+		     , POST_VIEW
+		     , POST_LIKE
+		     , POST_CONTENT
+		  FROM POST
+		  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+		 WHERE POST_NO = ?
+	</entry>
 
 
 

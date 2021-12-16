@@ -138,10 +138,8 @@
 		$(function(){
 			$("#tbl>tbody>tr").click(function(){
 				
-				const num = $(this).children().eq(0).text();
-				console.log(num);								
+				const num = $(this).children().eq(0).text();								
 				location.href = '<%=contextPath%>/detail.co?num=' + num;
-
 			})
 		})
 	</script>

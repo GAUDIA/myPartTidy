@@ -43,7 +43,6 @@ public class PostListController extends HttpServlet {
 		
 		listCount = new PostService().selectPostListCount();	
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		System.out.println(currentPage);
 		pageLimit = 10;
 		viewLimit = 15;
 		maxPage = (int)Math.ceil((double)listCount / viewLimit);

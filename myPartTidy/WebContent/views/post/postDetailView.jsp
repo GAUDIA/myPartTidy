@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.post.model.vo.Post"%>
+<%
+	Post p = (Post)request.getAttribute("post");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,18 +69,18 @@
 					<table>
 						<tr>
 							<th width="60"><h5>제목</h5></th>
-							<td colspan="7"><h6>이곳은 제목 들어갈 자리</h6></td>
+							<td colspan="7"><h6><%=p.getPostName()%></h6></td>
 						</tr>
 						<tr><td colspan="8" height="20"></td></tr>
 						<tr>
 							<th width="60">작성자</th>
-							<td width="150">작성자입니다</td>
-							<th width="70">작성일</th>
-							<td width="120">2021-12-12</td>
+							<td width="100"><%=p.getPostWriter()%></td>
+							<th width="60">작성일</th>
+							<td width="200"><%=p.getPostModify()%></td>
 							<th width="70">조회수</th>
-							<td width="80">123</td>
+							<td width="80"><%=p.getPostView()%></td>
 							<th width="70">추천수</th>
-							<td width="80">456</td>
+							<td width="80"><%=p.getPostLike()%></td>
 						</tr>
 						<tr><td colspan="8" height="20"></td></tr>
 					</table>
@@ -88,7 +91,7 @@
 						<tr><td colspan="7" height="20"></td></tr>
 						<tr>
 							<th width="50" style="display: flow-root"><h5>내용</h5></th>
-							<td colspan="6"><p width="1000" height="20000">내용이 들어갈 자리</p></td>
+							<td colspan="6"><p width="1000" height="20000"><%=p.getPostContent()%></p></td>
 						</tr>
 						<tr><td colspan="6" height="20"></td></tr>
 						<tr>
@@ -98,7 +101,7 @@
 							<td width="50">123</td>
 							<td><i class="far fa-heart fa-2x"></i></td>
 							<th>추천</th>
-							<td>456</td>
+							<td><%=p.getPostLike()%></td>
 						</tr>
 						<tr><td colspan="7" height="20"></td></tr>
 					</table>

@@ -12,6 +12,7 @@ public class Post {
 	private String postModify;
 	private String postStatus;
 	private String postNotice;
+	private int memNo;
 
 	public Post() {}
 	
@@ -121,7 +122,15 @@ public class Post {
 	public void setPostNotice(String postNotice) {
 		this.postNotice = postNotice;
 	}
-
+	
+	public int getMemNo() {
+		return memNo;
+	}
+	
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+	
 	@Override
 	public String toString() {
 		return "Post [postNo=" + postNo + ", postWriter=" + postWriter + ", postName=" + postName + ", postContent="

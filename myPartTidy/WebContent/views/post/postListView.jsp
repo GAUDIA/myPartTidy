@@ -96,9 +96,9 @@
 			                    	<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
 	                       				<td><input type="checkbox"></td>
 	                       			 <% } %>
-			                    	<td><%=p.getPostNo()%></td>
+			                    	<td id="postNo"><%=p.getPostNo()%></td>
 			                        <td><%=p.getPostWriter()%></td>
-			                        <td><%=p.getPostName()%></td>
+			                        <td id="title"><%=p.getPostName()%></td>
 			                        <td><%=p.getPostView()%></td>
 			                        <td><%=p.getPostLike()%></td>
 			                        <td><%=p.getPostModify() %></td>
@@ -151,20 +151,42 @@
         
 
     </div>
-
-
-    <script>
-    	$(function(){
-	        $("#check1").click(function(){
-	            if($(this).is(":checked")){
-	                $(":checkbox", $("table")).prop("checked", true);
-	            }else {
-	                $(":checkbox", $("table")).prop("checked", false);
-	            }
-	        })
-
-    	})
-    </script>
+    
+    <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+		
+		<script>
+			$(function(){
+				$("#table>tbody>tr").click(function(){
+					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(1).text();
+				});
+				
+			
+				$("#check1").click(function(){
+		            if($(this).is(":checked")){
+		                $(":checkbox", $("table")).prop("checked", true);
+		            }else {
+		                $(":checkbox", $("table")).prop("checked", false);
+		            }
+		        })	
+				
+			})
+		</script>
+	
+	<% } else { %>
+	
+		<script>
+			$(function(){
+				$("#table>tbody>tr").click(function(){							
+					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(0).text();
+				});
+				
+				
+			})
+		</script>
+	
+	<% } %>
+	
+	
 
 </body>
 </html>

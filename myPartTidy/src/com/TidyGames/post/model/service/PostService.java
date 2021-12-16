@@ -1,6 +1,6 @@
 package com.TidyGames.post.model.service;
 
-import static com.TidyGames.common.JDBCTemplate.close;
+import static com.TidyGames.common.JDBCTemplate.*;
 import static com.TidyGames.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -24,6 +24,25 @@ public class PostService {
 		ArrayList<Post> list = new PostDao().selectPostList(conn, pi);
 		close(conn);
 		return list;
+	}
+	
+	public int increaseCount(int postNo) {
+		Connection conn = getConnection();
+		int result = new PostDao().increaseCount(conn, postNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public Post selectPostDetail(int postNo) {
+		Connection conn = getConnection();
+		Post p = new PostDao().selectPostDetail(conn, postNo);
+		close(conn);
+		return p;
 	}
 
 }
