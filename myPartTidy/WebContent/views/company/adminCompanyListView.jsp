@@ -69,7 +69,6 @@
 		    <br>
 		    <h6>* 클릭시 상세조회 창으로 이동합니다</h6>
 		    <br>
-		    <form action="">
 	            <table class="table table-sm table-bordered" id="tbl">
 	                <thead style="background:rgb(80, 88, 83)">
 	                	<th width="60">No</th>
@@ -97,7 +96,6 @@
 	                </tbody>
 	            </table>
 		
-		    </form>
 		
 		    <br><br><br>
 		

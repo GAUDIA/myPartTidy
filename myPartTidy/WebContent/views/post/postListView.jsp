@@ -58,7 +58,7 @@
 
         <h2>TIDY COMMUNITY  <i class="far fa-comments"></i></h2>
         <br><br>
-        <form action="">
+        
 
             <div id="deletebtn" align="right" style="width:1200px;">
                 <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
@@ -73,7 +73,7 @@
 
             <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
 
-                <thead>
+                <thead style="background:rgb(80, 88, 83)">
                     <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
                     	<th><input type="checkbox" id="check1"></th>
                     <% } %>
@@ -91,11 +91,11 @@
 	                    </tr>
 	                <% }else { %>
 	                    <tr>
-	                        <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-	                       		<td><input type="checkbox"></td>
-	                        <% } %>
 	                        <% for(Post p : list) { %>
 			                    <tr>
+			                    	<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+	                       				<td><input type="checkbox"></td>
+	                       			 <% } %>
 			                    	<td><%=p.getPostNo()%></td>
 			                        <td><%=p.getPostWriter()%></td>
 			                        <td><%=p.getPostName()%></td>
@@ -112,23 +112,24 @@
             <br><br>
 
             <div class="paging-area" align="center">
-	        	<% if(currentPage != 1) { %>
-            		<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';"> &lt; </button>
-            	<% } %>
             
-            	<% for(int p=startPage; p<=endPage; p++){ %>
-            	
-            		<% if(p == currentPage) { %>
-            			<button disabled style="background:rgb(134, 173, 223); color:white;"><%= p %></button>
-            		<% }else { %>
-            			<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
-            		<% } %>
-            	
-            	<% } %>
-
-            	<% if(currentPage != maxPage) { %>
-            		<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';"> &gt; </button>
-           	 	<% } %>
+	        	<% if(currentPage != 1) { %>
+	            	<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';"> &lt; </button>
+	            <% } %>
+	            
+	            <% for(int p=startPage; p<=endPage; p++){ %>
+	            	
+	            	<% if(p == currentPage) { %>
+	            		<button disabled style="border-radius:3px; background:orange; color:white;"><%= p %></button>
+	            	<% }else { %>
+	            		<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
+	            	<% } %>
+	            	
+	            <% } %>
+	            
+	            <% if(currentPage != maxPage) { %>
+	            	<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';"> &gt; </button>
+	            <% } %>
         	</div>
             <br><br>
 
@@ -147,7 +148,7 @@
 
             </div>
 
-        </form>
+        
 
     </div>
 
@@ -161,11 +162,7 @@
 	                $(":checkbox", $("table")).prop("checked", false);
 	            }
 	        })
-	        
-	        $("#title").click(function(){
-	        	location.href = '<%=contextPath%>/detail.po';
-	        	// 나중에덧붙이기: ?bno=' + $(this).children().eq(0).text();
-	        })
+
     	})
     </script>
 
