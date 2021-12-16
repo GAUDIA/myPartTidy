@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.post.model.vo.Post" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,44 +85,51 @@
                     <th width="150">작성일</th>
                 </thead>
                 <tbody>
-                    <!--게시물이 없을 경우-->
-                    <tr>    
-                        <td colspan="7">조회된 게시글이 없습니다.</td>
-                    </tr>
-                    <!--게시물 있을 경우-->
-                    <tr>
-                        <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-                       		<td><input type="checkbox"></td>
-                        <% } %>
-                        <td>15</td>
-                        <td>라랄라라라</td>
-                        <td id="title">제목 제목 이것은 제목입니다</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>2021-12-05</td>
-                    </tr>
+                	<% if(list.isEmpty()) { %>
+	                    <tr>    
+	                        <td colspan="7">조회된 게시글이 없습니다.</td>
+	                    </tr>
+	                <% }else { %>
+	                    <tr>
+	                        <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+	                       		<td><input type="checkbox"></td>
+	                        <% } %>
+	                        <% for(Post p : list) { %>
+			                    <tr>
+			                    	<td><%=p.getPostNo()%></td>
+			                        <td><%=p.getPostWriter()%></td>
+			                        <td><%=p.getPostName()%></td>
+			                        <td><%=p.getPostView()%></td>
+			                        <td><%=p.getPostLike()%></td>
+			                        <td><%=p.getPostModify() %></td>
+			                    </tr>
+	                    	<% } %>
+	                    </tr>
+                    <% } %>
                 </tbody>
             </table>
 
             <br><br>
 
             <div class="paging-area" align="center">
+	        	<% if(currentPage != 1) { %>
+            		<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';"> &lt; </button>
+            	<% } %>
+            
+            	<% for(int p=startPage; p<=endPage; p++){ %>
+            	
+            		<% if(p == currentPage) { %>
+            			<button disabled style="background:rgb(134, 173, 223); color:white;"><%= p %></button>
+            		<% }else { %>
+            			<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
+            		<% } %>
+            	
+            	<% } %>
 
-                <button> &lt; </button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>10</button>
-                <button> &gt; </button>
-    
-            </div>
-
+            	<% if(currentPage != maxPage) { %>
+            		<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';"> &gt; </button>
+           	 	<% } %>
+        	</div>
             <br><br>
 
             <div class="search-area" align="center">

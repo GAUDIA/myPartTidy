@@ -36,7 +36,7 @@ public class AdminCompanySearchController extends HttpServlet {
 		String companyName = request.getParameter("companyName");
 		ArrayList<Company> list = new AdminCompanyService().searchCompany(companyName);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/company/adminCompanyListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/company/adminCompanySearchListView.jsp").forward(request, response);
 		
 	}
 

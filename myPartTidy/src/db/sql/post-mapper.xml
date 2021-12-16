@@ -2,6 +2,36 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
+	<entry key="selectPostListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM POST
+		 WHERE POST_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectPostList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+						       POST_NO
+						     , MEM_NICK
+						     , POST_NAME
+						     , POST_VIEW
+						     , POST_LIKE
+						     , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD') "POST_MODIFY"
+						     , POST_NOTICE
+						  FROM POST P
+						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+						 WHERE P.POST_STATUS = 'Y'
+						 ORDER
+						    BY POST_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
 
 
 
