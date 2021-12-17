@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.TidyGames.post.model.vo.Post"%>
 <%
-	Post p = (Post) request.getAttribute("post");
+	Post p = (Post)request.getAttribute("post");
 %>
 <!DOCTYPE html>
 <html>
@@ -53,6 +53,9 @@
 table {
 	color: black;
 }
+.like {
+	cursor:pointer;
+}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -61,18 +64,23 @@ table {
 		<%@ include file="../common/topbar.jsp"%>
 		<%@ include file="../common/navibar.jsp"%>
 	</div>
+	
+	
 
 	<div class="outer">
 
 		<h2>
 			TIDY COMMUNITY <i class="far fa-comments"></i>
 		</h2>
+		
 		<br>
 		<div align="right">
-			<button type="button" class="btn btn-sm btn-warning"
-				data-toggle="modal" data-target="#myModal">신고</button>
-			<a href="" class="btn btn-sm btn-info">수정</a> <a href=""
-				class="btn btn-sm btn-danger">삭제</a>
+			<% if(loginUser != null && loginUser.getMemNo() == p.getMemNo()) { %>
+				<a href="" class="btn btn-sm btn-info">수정</a> 
+				<a href=""class="btn btn-sm btn-danger">삭제</a>
+			<% } else if(loginUser != null) { %>
+				<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
+			<% } %>
 		</div>
 		<br>
 		<div class="view-form">
@@ -122,9 +130,19 @@ table {
 							<td><i class="far fa-comment-dots fa-2x"></i></td>
 							<th>댓글</th>
 							<td width="50">123</td>
-							<td><i class="far fa-heart fa-2x"></i></td>
-							<th>추천</th>
-							<td><%=p.getPostLike()%></td>
+							<% if(loginUser == null || !(loginUser.getMemAccess()).equals("unblock")) { %>
+								<div id="canNotLike" class="like">								
+									<td><i class="far fa-heart fa-2x"></i></td>
+									<th>추천</th>
+									<td><%=p.getPostLike()%></td>
+								</div>
+							<% } else { %>
+								<div id="canLike" class="like">								
+									<td><i class="far fa-heart fa-2x"></i></td>
+									<th>추천</th>
+									<td><%=p.getPostLike()%></td>
+								</div>
+							<% } %>
 						</tr>
 						<tr>
 							<td colspan="7" height="20"></td>
@@ -214,9 +232,11 @@ table {
 					console.log(reportNo);
 					const reportedMemNo = $(".modal-footer").children().eq(1).val();
 					console.log(reportedMemNo);
-					
-					
-				})
+				});
+				
+				$("#canNotLike").click(function(){
+					alert('로그인한 회원만 이용할 수 있는 기능입니다');
+				});
 			})
 		</script>
 </body>

@@ -40,6 +40,13 @@
 		   AND POST_STATUS = 'Y'
 	</entry>
 	
+	<entry key="confirmMember">
+		SELECT
+			   MEM_ACCESS
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+	</entry>
+	
 	<entry key="selectPostDetail">
 		SELECT
 		       POST_NO

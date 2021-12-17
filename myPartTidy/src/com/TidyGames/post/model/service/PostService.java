@@ -1,12 +1,15 @@
 package com.TidyGames.post.model.service;
 
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.close;
+import static com.TidyGames.common.JDBCTemplate.commit;
 import static com.TidyGames.common.JDBCTemplate.getConnection;
+import static com.TidyGames.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.post.model.dao.PostDao;
 import com.TidyGames.post.model.vo.Post;
 
@@ -36,6 +39,13 @@ public class PostService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public Member confirmMember(String memId) {
+		Connection conn = getConnection();
+		Member m = new PostDao().confirmMember(conn, memId);
+		close(conn);
+		return m;
 	}
 	
 	public Post selectPostDetail(int postNo) {

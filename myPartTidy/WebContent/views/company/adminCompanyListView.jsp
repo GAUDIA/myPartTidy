@@ -51,6 +51,7 @@
     	border:none;
     }
 	#searchbtn{color:white; background:#0e332c; border:none;}
+	#searchbtn:hover{cursor:pointer; color:orange;}
 </style>
 </head>
 <body style="background-color: #0e332c;">

@@ -1,6 +1,7 @@
 package com.TidyGames.post.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.post.model.service.PostService;
 import com.TidyGames.post.model.vo.Post;
+import com.TidyGames.post.model.service.PostService;
+
+
 
 /**
- * Servlet implementation class PostDetailControlelr
+ * Servlet implementation class PostSearchController
  */
-@WebServlet("/detail.po")
-public class PostDetailController extends HttpServlet {
+@WebServlet("/search.po")
+public class PostSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostDetailController() {
+    public PostSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +34,13 @@ public class PostDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		PostService ps = new PostService();
-		int postNo = Integer.parseInt(request.getParameter("num"));		
-		int result = ps.increaseCount(postNo);
-
-		if(result > 0) {
-			Post p = ps.selectPostDetail(postNo);
-
-			request.setAttribute("post", p);
-			request.getRequestDispatcher("views/post/postDetailView.jsp").forward(request,response);
-		}else {
-			request.setAttribute("errorMsg", "글 조회에 실패하셨습니다");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
-		}
-		
-		
-		
-		
+		request.setCharacterEncoding("utf-8");
+		/*
+		String companyName = request.getParameter("companyName");
+		ArrayList<Post> list = new PostService().searchPost(companyName);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/post/postListView.jsp").forward(request, response);
+		*/
 	}
 
 	/**
