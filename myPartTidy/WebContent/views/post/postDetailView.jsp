@@ -123,7 +123,19 @@ table {
 							<td colspan="6"><p width="1000" height="20000"><%=p.getPostContent()%></p></td>
 						</tr>
 						<tr>
-							<td colspan="6" height="20"></td>
+							<th></th>
+							<td colspan="2">
+								<img src="" width="300" height="300" style="display:none">
+							</td>
+							<td colspan="2">
+								<img src="" width="300" height="300">
+							</td>
+							<td colspan="2">
+								<img src="" width="300" height="300">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="7" height="20"></td>
 						</tr>
 						<tr>
 							<td></td>
