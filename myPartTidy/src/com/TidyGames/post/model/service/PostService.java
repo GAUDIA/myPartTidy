@@ -12,6 +12,7 @@ import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.post.model.dao.PostDao;
 import com.TidyGames.post.model.vo.Post;
+import com.TidyGames.post.model.vo.PostFile;
 
 public class PostService {
 	
@@ -54,5 +55,31 @@ public class PostService {
 		close(conn);
 		return p;
 	}
+	
+	public int insertPost(Post p, ArrayList<PostFile> list) {
+		Connection conn = getConnection();
+		
+		int result1 = new PostDao().insertPost(conn, p);
+		int result2 = 1;
+		
+		if(list != null) {
+			result2 = new PostDao().insertFile(conn, list);
+		}
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result1 * result2;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

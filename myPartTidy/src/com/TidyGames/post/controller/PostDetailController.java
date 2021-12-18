@@ -37,7 +37,7 @@ public class PostDetailController extends HttpServlet {
 
 		if(result > 0) {
 			Post p = ps.selectPostDetail(postNo);
-
+			
 			request.setAttribute("post", p);
 			request.getRequestDispatcher("views/post/postDetailView.jsp").forward(request,response);
 		}else {

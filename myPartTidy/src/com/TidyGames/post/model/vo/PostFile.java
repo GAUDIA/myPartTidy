@@ -3,7 +3,7 @@ package com.TidyGames.post.model.vo;
 public class PostFile {
 	
 	private int fileNo;
-	private int refPontNo;
+	private int refPostNo;
 	private String fileOrigin;
 	private String fileChange;
 	private String filePath;
@@ -11,11 +11,11 @@ public class PostFile {
 	
 	public PostFile() {}
 
-	public PostFile(int fileNo, int refPontNo, String fileOrigin, String fileChange, String filePath,
+	public PostFile(int fileNo, int refPostNo, String fileOrigin, String fileChange, String filePath,
 			String fileStatus) {
 		super();
 		this.fileNo = fileNo;
-		this.refPontNo = refPontNo;
+		this.refPostNo = refPostNo;
 		this.fileOrigin = fileOrigin;
 		this.fileChange = fileChange;
 		this.filePath = filePath;
@@ -30,12 +30,12 @@ public class PostFile {
 		this.fileNo = fileNo;
 	}
 
-	public int getRefPontNo() {
-		return refPontNo;
+	public int getRefPostNo() {
+		return refPostNo;
 	}
 
-	public void setRefPontNo(int refPontNo) {
-		this.refPontNo = refPontNo;
+	public void setRefPostNo(int refPostNo) {
+		this.refPostNo = refPostNo;
 	}
 
 	public String getFileOrigin() {
@@ -72,7 +72,7 @@ public class PostFile {
 
 	@Override
 	public String toString() {
-		return "PostFile [fileNo=" + fileNo + ", refPontNo=" + refPontNo + ", fileOrigin=" + fileOrigin
+		return "PostFile [fileNo=" + fileNo + ", refPostNo=" + refPostNo + ", fileOrigin=" + fileOrigin
 				+ ", fileChange=" + fileChange + ", filePath=" + filePath + ", fileStatus=" + fileStatus + "]";
 	}
 	
