@@ -62,6 +62,30 @@
 		 WHERE POST_NO = ?
 	</entry>
 	
+	<entry key="firstPostNo">
+		SELECT
+		       POST_NO FIRSTPOST
+		  FROM (
+		        SELECT POST_NO
+		          FROM POST
+		         ORDER
+		            BY POST_NO
+		        )
+		 WHERE ROWNUM=1
+	</entry>
+	
+	<entry key="lastPostNo">
+		SELECT
+		       POST_NO LASTPOST
+		  FROM (
+		        SELECT POST_NO
+		          FROM POST
+		         ORDER
+		            BY POST_NO DESC
+		        )
+		 WHERE ROWNUM=1
+	</entry>
+	
 	<entry key="insertPost">
 		INSERT
 		  INTO POST

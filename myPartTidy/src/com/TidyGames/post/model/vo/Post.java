@@ -13,6 +13,8 @@ public class Post {
 	private String postStatus;
 	private String postNotice;
 	private int memNo;
+	private int firstPost;
+	private int lastPost;
 
 	public Post() {}
 	
@@ -29,7 +31,8 @@ public class Post {
 	}
 
 	public Post(int postNo, String postWriter, String postName, String postContent, String postEnroll, int postView,
-			int postLike, String postModify, String postStatus, String postNotice) {
+			int postLike, String postModify, String postStatus, String postNotice, int memNo, int firstPost,
+			int lastPost) {
 		super();
 		this.postNo = postNo;
 		this.postWriter = postWriter;
@@ -41,6 +44,9 @@ public class Post {
 		this.postModify = postModify;
 		this.postStatus = postStatus;
 		this.postNotice = postNotice;
+		this.memNo = memNo;
+		this.firstPost = firstPost;
+		this.lastPost = lastPost;
 	}
 
 	public int getPostNo() {
@@ -122,20 +128,37 @@ public class Post {
 	public void setPostNotice(String postNotice) {
 		this.postNotice = postNotice;
 	}
-	
+
 	public int getMemNo() {
 		return memNo;
 	}
-	
+
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
-	
+
+	public int getFirstPost() {
+		return firstPost;
+	}
+
+	public void setFirstPost(int firstPost) {
+		this.firstPost = firstPost;
+	}
+
+	public int getLastPost() {
+		return lastPost;
+	}
+
+	public void setLastPost(int lastPost) {
+		this.lastPost = lastPost;
+	}
+
 	@Override
 	public String toString() {
 		return "Post [postNo=" + postNo + ", postWriter=" + postWriter + ", postName=" + postName + ", postContent="
 				+ postContent + ", postEnroll=" + postEnroll + ", postView=" + postView + ", postLike=" + postLike
-				+ ", postModify=" + postModify + ", postStatus=" + postStatus + ", postNotice=" + postNotice + "]";
+				+ ", postModify=" + postModify + ", postStatus=" + postStatus + ", postNotice=" + postNotice
+				+ ", memNo=" + memNo + ", firstPost=" + firstPost + ", lastPost=" + lastPost + "]";
 	}
 
 	

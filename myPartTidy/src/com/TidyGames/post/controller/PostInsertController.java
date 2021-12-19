@@ -62,12 +62,12 @@ public class PostInsertController extends HttpServlet {
 			}
 			
 			ArrayList<PostFile> list = new ArrayList<>();
-			PostFile f = new PostFile(); 
 			
 			for(int i=1; i<=3; i++) {
 				String key = "file" + i;
 				
 				if(multiRequest.getOriginalFileName(key) != null) {
+					PostFile f = new PostFile(); 
 					f.setFileOrigin(multiRequest.getOriginalFileName(key));
 					f.setFileChange(multiRequest.getFilesystemName(key));
 					f.setFilePath("resources/post_upfiles/");
@@ -83,8 +83,8 @@ public class PostInsertController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
 			} else {
 				
-				if(f != null) {
-					new File(savePath + f.getFileChange()).delete();
+				for(PostFile f : list) {
+					new File(savePath + f.getFileChange()).delete();					
 				}
 				
 				request.setAttribute("errorMsg", "게시판 글등록 실패!");

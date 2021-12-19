@@ -16,23 +16,25 @@ import com.TidyGames.post.model.vo.PostFile;
 
 public class PostService {
 	
+	PostDao pd = new PostDao();
+	
 	public int selectPostListCount() {
 		Connection conn = getConnection();
-		int listCount = new PostDao().selectPostListCount(conn);
+		int listCount = pd.selectPostListCount(conn);
 		close(conn);
 		return listCount;
 	}
 	
 	public ArrayList<Post> selectPostList(PageInfo pi) {
 		Connection conn = getConnection();
-		ArrayList<Post> list = new PostDao().selectPostList(conn, pi);
+		ArrayList<Post> list = pd.selectPostList(conn, pi);
 		close(conn);
 		return list;
 	}
 	
 	public int increaseCount(int postNo) {
 		Connection conn = getConnection();
-		int result = new PostDao().increaseCount(conn, postNo);
+		int result = pd.increaseCount(conn, postNo);
 		if(result > 0) {
 			commit(conn);
 		}else {
@@ -44,26 +46,41 @@ public class PostService {
 	
 	public Member confirmMember(String memId) {
 		Connection conn = getConnection();
-		Member m = new PostDao().confirmMember(conn, memId);
+		Member m = pd.confirmMember(conn, memId);
 		close(conn);
 		return m;
 	}
 	
 	public Post selectPostDetail(int postNo) {
 		Connection conn = getConnection();
-		Post p = new PostDao().selectPostDetail(conn, postNo);
+		Post p = null;
+		p = pd.selectPostDetail(conn, postNo);
 		close(conn);
 		return p;
+	}
+	
+	public Post firstPostNo() {
+		Connection conn = getConnection();
+		Post fpn = pd.firstPostNo(conn);
+		close(conn);
+		return fpn;
+	}
+	
+	public Post lastPostNo() {
+		Connection conn = getConnection();
+		Post lpn = pd.lastPostNo(conn);
+		close(conn);
+		return lpn;
 	}
 	
 	public int insertPost(Post p, ArrayList<PostFile> list) {
 		Connection conn = getConnection();
 		
-		int result1 = new PostDao().insertPost(conn, p);
+		int result1 = pd.insertPost(conn, p);
 		int result2 = 1;
 		
 		if(list != null) {
-			result2 = new PostDao().insertFile(conn, list);
+			result2 = pd.insertFile(conn, list);
 		}
 		
 		if(result1 > 0 && result2 > 0) {

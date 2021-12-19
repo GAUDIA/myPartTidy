@@ -186,6 +186,60 @@ public class PostDao {
 	}
 	
 	/**
+	 * 첫번째 글 번호
+	 * @param conn
+	 * @return
+	 */
+	public Post firstPostNo(Connection conn) {
+		Post result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("firstPostNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = new Post();
+				result.setFirstPost(rset.getInt("firstpost"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 마지막 글 번호
+	 * @param conn
+	 * @return
+	 */
+	public Post lastPostNo(Connection conn) {
+		Post result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("lastPostNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = new Post();
+				result.setLastPost(rset.getInt("lastpost"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
 	 * 글 등록
 	 * @param conn
 	 * @param p

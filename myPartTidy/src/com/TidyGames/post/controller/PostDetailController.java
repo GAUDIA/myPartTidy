@@ -37,8 +37,12 @@ public class PostDetailController extends HttpServlet {
 
 		if(result > 0) {
 			Post p = ps.selectPostDetail(postNo);
-			
+			Post fpn = ps.firstPostNo();
+			Post lpn = ps.lastPostNo();
+			System.out.println(lpn);
 			request.setAttribute("post", p);
+			request.setAttribute("fpn", fpn);
+			request.setAttribute("lpn", lpn);
 			request.getRequestDispatcher("views/post/postDetailView.jsp").forward(request,response);
 		}else {
 			request.setAttribute("errorMsg", "글 조회에 실패하셨습니다");

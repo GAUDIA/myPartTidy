@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8" import="com.TidyGames.post.model.vo.Post"%>
 <%
 	Post p = (Post)request.getAttribute("post");
+	Post lpn = (Post)request.getAttribute("lpn");
+	Post fpn = (Post)request.getAttribute("fpn");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,6 +58,7 @@ table {
 .like {
 	cursor:pointer;
 }
+img{display: none;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -137,6 +140,17 @@ table {
 						<tr>
 							<td colspan="7" height="20"></td>
 						</tr>
+					</table>
+					<!--  if문으로 파일 있을 때만 보여지게 -->
+					<table>
+						<th>첨부파일</th>
+						<td><a>원본명.txt</a></td>
+						<td><a>원본명.jpg</a></td>
+						<td><a>원본명.png</a></td>
+					</table>
+				 </div>
+
+					<table>
 						<tr>
 							<td></td>
 							<td><i class="far fa-comment-dots fa-2x"></i></td>
@@ -160,7 +174,7 @@ table {
 							<td colspan="7" height="20"></td>
 						</tr>
 					</table>
-				</div>
+				
 
 				<div class="comment-view">
 					<table>
@@ -183,9 +197,13 @@ table {
 	</div><!-- outer -->
 	<br>
 	<div align="center">
-		<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()-1%>" class="btn btn-sm btn-secondary">이전글</a> 
-		<a href="<%=contextPath%>/list.po?cpage=1" class="btn btn-sm btn-secondary">목록</a> 
-		<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()+1%>" class="btn btn-sm btn-secondary">다음글</a>
+		<% if(p.getPostNo() != fpn.getFirstPost()) { %>
+			<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()-1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
+		<% } %>
+		<a href="<%=contextPath%>/list.po?cpage=1" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
+		<% if(p.getPostNo() != lpn.getLastPost()) { %>
+			<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()+1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<% } %>
 	</div>
 	<br>
 	<br>
