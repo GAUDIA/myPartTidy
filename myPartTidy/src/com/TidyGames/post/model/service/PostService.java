@@ -88,7 +88,6 @@ public class PostService {
 		}else {
 			rollback(conn);
 		}
-		
 		return result1 * result2;
 	}
 	

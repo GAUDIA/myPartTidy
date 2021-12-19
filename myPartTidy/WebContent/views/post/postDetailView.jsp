@@ -123,7 +123,7 @@ img{display: none;}
 						</tr>
 						<tr>
 							<th width="50" style="display: flow-root"><h5>내용</h5></th>
-							<td colspan="6"><p width="1000" height="20000"><%=p.getPostContent()%></p></td>
+							<td colspan="6"><pre width="1000" height="20000"><%=p.getPostContent()%></pre></td>
 						</tr>
 						<tr>
 							<th></th>

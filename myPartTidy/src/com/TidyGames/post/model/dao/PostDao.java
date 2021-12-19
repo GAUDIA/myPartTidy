@@ -272,7 +272,7 @@ public class PostDao {
 	 * @return
 	 */
 	public int insertFile(Connection conn, ArrayList<PostFile> list) {
-		int result = 0;
+		int result = 1;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertFile");
 		

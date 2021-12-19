@@ -39,7 +39,6 @@ public class PostDetailController extends HttpServlet {
 			Post p = ps.selectPostDetail(postNo);
 			Post fpn = ps.firstPostNo();
 			Post lpn = ps.lastPostNo();
-			System.out.println(lpn);
 			request.setAttribute("post", p);
 			request.setAttribute("fpn", fpn);
 			request.setAttribute("lpn", lpn);

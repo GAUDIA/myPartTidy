@@ -62,22 +62,33 @@ public class PostInsertController extends HttpServlet {
 			}
 			
 			ArrayList<PostFile> list = new ArrayList<>();
+			String key = null;
 			
-			for(int i=1; i<=3; i++) {
-				String key = "file" + i;
+			if(multiRequest.getOriginalFileName("file1") != null) {
 				
-				if(multiRequest.getOriginalFileName(key) != null) {
-					PostFile f = new PostFile(); 
-					f.setFileOrigin(multiRequest.getOriginalFileName(key));
-					f.setFileChange(multiRequest.getFilesystemName(key));
-					f.setFilePath("resources/post_upfiles/");
+				for(int i=1; i<=3; i++) {
+					key = "file" + i;
 					
-					list.add(f);
-				} 
-	
+					
+					if(multiRequest.getOriginalFileName(key) != null) {
+						
+						
+						PostFile f = new PostFile(); 
+						f.setFileOrigin(multiRequest.getOriginalFileName(key));
+						f.setFileChange(multiRequest.getFilesystemName(key));
+						f.setFilePath("resources/post_upfiles/");
+						
+						list.add(f);
+					} 
+					
+				}
+						
 			}
+			
+	
 				
 			int result = new PostService().insertPost(p, list);
+			
 			
 			if(result > 0) {
 				response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
