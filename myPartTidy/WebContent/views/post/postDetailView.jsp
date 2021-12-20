@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.TidyGames.post.model.vo.Post,
+<%@ page import="com.TidyGames.post.model.vo.Post, com.TidyGames.common.model.vo.PageInfo,
 				 com.TidyGames.post.model.vo.PostFile, java.util.ArrayList"
 %>
 <%
@@ -8,6 +8,7 @@
 	Post lpn = (Post)request.getAttribute("lpn");
 	Post fpn = (Post)request.getAttribute("fpn");
 	ArrayList<PostFile> flist = (ArrayList<PostFile>)request.getAttribute("flist");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 %>
 <!DOCTYPE html>
 <html>
@@ -82,9 +83,9 @@ table {
 		<br>
 		<div align="right">
 			<% if(loginUser != null && loginUser.getMemNo() == p.getMemNo()) { %>
-				<a href="" class="btn btn-sm btn-info">수정</a> 
-				<a href=""class="btn btn-sm btn-danger">삭제</a>
-			<% } else if(loginUser != null) { %>
+				<a href="<%= contextPath %>/updateForm.po?num=<%= p.getPostNo() %>" class="btn btn-sm btn-info">수정</a> 
+				<a href="<%= contextPath %>/delete.po?num=<%=p.getPostNo()%>" class="btn btn-sm btn-danger">삭제</a>
+			<% } else if(loginUser != null && loginUser.getMemAccess().equals("unblock")) { %>
 				<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
 			<% } %>
 		</div>
@@ -200,11 +201,11 @@ table {
 	<br>
 	<div align="center">
 		<% if(p.getPostNo() != fpn.getFirstPost()) { %>
-			<a href="<%=contextPath%>/detail.po?num=<%=p.getPrevNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
+			<a href="<%=contextPath%>/detail.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getPrevNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
 		<% } %>
-		<a href="<%=contextPath%>/list.po?cpage=1" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
+		<a href="<%=contextPath%>/list.po?cpage=<%=pi.getCurrentPage()%>" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
 		<% if(p.getPostNo() != lpn.getLastPost()) { %>
-			<a href="<%=contextPath%>/detail.po?num=<%=p.getNextNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
+			<a href="<%=contextPath%>/detail.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getNextNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
 		<% } %>
 	</div>
 	<br>
@@ -259,6 +260,9 @@ table {
 		
 		<script>
 			$(function(){
+				
+				$("#")
+				
 				$("#postReport").click(function(){
 					const reportNo = $(".modal-footer").children().eq(0).val();
 					console.log(reportNo);

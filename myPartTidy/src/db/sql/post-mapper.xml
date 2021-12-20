@@ -59,8 +59,8 @@
 		             , POST_VIEW
 		             , POST_LIKE
 		             , POST_CONTENT
-		             , LAG(POST_NO) OVER(ORDER BY POST_NO DESC) PREV_NO
-		             , LEAD(POST_NO) OVER(ORDER BY POST_NO DESC) NEXT_NO
+		             , LAG(POST_NO) OVER(ORDER BY POST_NO) PREV_NO
+		             , LEAD(POST_NO) OVER(ORDER BY POST_NO) NEXT_NO
 		          FROM POST
 		          JOIN MEMBER ON (POST_WRITER = MEM_NO)
         		 )
@@ -140,6 +140,13 @@
 		  , ?
 		  , ?
 		  )
+	</entry>
+	
+	<entry key="deletePost">
+		UPDATE
+		       POST
+		   SET POST_STATUS = 'N'
+		 WHERE POST_NO = ?
 	</entry>
 
 

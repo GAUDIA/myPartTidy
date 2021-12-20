@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.post.model.service.PostService;
 import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.post.model.vo.PostFile;
@@ -36,17 +37,26 @@ public class PostDetailController extends HttpServlet {
 		PostService ps = new PostService();
 		int postNo = Integer.parseInt(request.getParameter("num"));		
 		int result = ps.increaseCount(postNo);
+		int currentPage = Integer.parseInt(request.getParameter("cpage"));
+		System.out.println(postNo);
+		System.out.println(currentPage);
+		
+		PageInfo pi = new PageInfo();
+		pi.setCurrentPage(currentPage);
+		
 
 		if(result > 0) {
 			Post p = ps.selectPostDetail(postNo);
+			System.out.println(p);
 			Post fpn = ps.firstPostNo();
 			Post lpn = ps.lastPostNo();
-			ArrayList<PostFile> list = ps.selectPostFile(postNo);	
+			ArrayList<PostFile> list = ps.selectPostFile(postNo);
 			
 			request.setAttribute("post", p);
 			request.setAttribute("fpn", fpn);
 			request.setAttribute("lpn", lpn);
 			request.setAttribute("flist", list);
+			request.setAttribute("pi", pi);
 			
 			request.getRequestDispatcher("views/post/postDetailView.jsp").forward(request,response);
 		}else {

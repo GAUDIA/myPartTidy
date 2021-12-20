@@ -60,7 +60,10 @@
         <h2>TIDY COMMUNITY  <i class="far fa-comments"></i></h2>
         <br><br>
         
-
+        <form role="form" method="post">  
+        	<input type="hidden" name="currentPage" value="<%=currentPage%>">
+		</form>
+		
             <div id="deletebtn" align="right" style="width:1200px;">
                 <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
                 	<a href="" class="btn btn-sm btn-danger">삭제</a>
@@ -177,11 +180,10 @@
 	
 		<script>
 			$(function(){
-				$("#table>tbody>tr").click(function(){	
-					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(0).text();
+				$("#table>tbody>tr").click(function(){
+					location.href = '<%=contextPath%>/detail.po?cpage=<%=currentPage%>&num=' + $(this).children().eq(0).text();
 				});
-			
-				
+
 			})
 		</script>
 	
