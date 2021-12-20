@@ -38,16 +38,13 @@ public class PostDetailController extends HttpServlet {
 		int postNo = Integer.parseInt(request.getParameter("num"));		
 		int result = ps.increaseCount(postNo);
 		int currentPage = Integer.parseInt(request.getParameter("cpage"));
-		System.out.println(postNo);
-		System.out.println(currentPage);
-		
+
 		PageInfo pi = new PageInfo();
 		pi.setCurrentPage(currentPage);
 		
 
 		if(result > 0) {
 			Post p = ps.selectPostDetail(postNo);
-			System.out.println(p);
 			Post fpn = ps.firstPostNo();
 			Post lpn = ps.lastPostNo();
 			ArrayList<PostFile> list = ps.selectPostFile(postNo);

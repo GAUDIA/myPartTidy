@@ -83,8 +83,8 @@ table {
 		<br>
 		<div align="right">
 			<% if(loginUser != null && loginUser.getMemNo() == p.getMemNo()) { %>
-				<a href="<%= contextPath %>/updateForm.po?num=<%= p.getPostNo() %>" class="btn btn-sm btn-info">수정</a> 
-				<a href="<%= contextPath %>/delete.po?num=<%=p.getPostNo()%>" class="btn btn-sm btn-danger">삭제</a>
+				<a href="<%= contextPath %>/updateForm.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>" class="btn btn-sm btn-info">수정</a> 
+				<a href="<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getPostNo()%>" class="btn btn-sm btn-danger">삭제</a>
 			<% } else if(loginUser != null && loginUser.getMemAccess().equals("unblock")) { %>
 				<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
 			<% } %>
