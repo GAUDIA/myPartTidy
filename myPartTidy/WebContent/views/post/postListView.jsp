@@ -161,7 +161,7 @@
 		<script>
 			$(function(){
 				$("#table>tbody>tr").click(function(){
-					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(1).text();
+					location.href = '<%=contextPath%>/detail.po?cpage=<%=currentPage%>&num=' + $(this).children().eq(1).text();
 				});
 				
 			

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.TidyGames.common.model.vo.MyFileRenamePolicy;
+import com.TidyGames.common.MyFileRenamePolicy;
 import com.TidyGames.post.model.service.PostService;
 import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.post.model.vo.PostFile;
