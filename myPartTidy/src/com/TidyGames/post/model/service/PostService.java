@@ -53,10 +53,16 @@ public class PostService {
 	
 	public Post selectPostDetail(int postNo) {
 		Connection conn = getConnection();
-		Post p = null;
-		p = pd.selectPostDetail(conn, postNo);
+		Post pf = pd.selectPostDetail(conn, postNo);
 		close(conn);
-		return p;
+		return pf;
+	}
+	
+	public ArrayList<PostFile> selectPostFile(int postNo) {
+		Connection conn = getConnection();
+		ArrayList<PostFile> list = pd.selectPostFile(conn, postNo);
+		close(conn);
+		return list;
 	}
 	
 	public Post firstPostNo() {

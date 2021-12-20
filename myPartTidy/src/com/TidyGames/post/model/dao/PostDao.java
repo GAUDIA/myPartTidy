@@ -126,6 +126,8 @@ public class PostDao {
 		return result;
 	}
 	
+	
+	
 	public Member confirmMember(Connection conn, String memId) {
 		Member m = null;
 		PreparedStatement pstmt = null;
@@ -174,7 +176,9 @@ public class PostDao {
 				p.setPostModify(rset.getString("post_modify"));
 				p.setPostView(rset.getInt("post_view"));
 				p.setPostLike(rset.getInt("post_like"));
-				p.setPostContent(rset.getString("post_content"));	
+				p.setPostContent(rset.getString("post_content"));
+				p.setPrevNo(rset.getInt("prev_no"));
+				p.setNextNo(rset.getInt("next_no"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -183,6 +187,41 @@ public class PostDao {
 			close(pstmt);
 		}
 		return p;
+	}
+	
+	/**
+	 * 첨부파일 조회
+	 * @param conn
+	 * @param postNo
+	 * @return
+	 */
+	public ArrayList<PostFile> selectPostFile(Connection conn, int postNo) {
+		ArrayList<PostFile> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPostFile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				PostFile pf = new PostFile();
+				pf.setFileNo(rset.getInt("file_no"));
+				pf.setFileOrigin(rset.getString("file_origin"));
+				pf.setFileChange(rset.getString("file_change"));
+				pf.setFilePath(rset.getString("file_path"));
+				
+				list.add(pf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 	/**

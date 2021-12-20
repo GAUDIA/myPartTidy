@@ -1,6 +1,7 @@
 package com.TidyGames.post.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.post.model.service.PostService;
 import com.TidyGames.post.model.vo.Post;
+import com.TidyGames.post.model.vo.PostFile;
 
 /**
  * Servlet implementation class PostDetailControlelr
@@ -39,9 +41,13 @@ public class PostDetailController extends HttpServlet {
 			Post p = ps.selectPostDetail(postNo);
 			Post fpn = ps.firstPostNo();
 			Post lpn = ps.lastPostNo();
+			ArrayList<PostFile> list = ps.selectPostFile(postNo);	
+			
 			request.setAttribute("post", p);
 			request.setAttribute("fpn", fpn);
 			request.setAttribute("lpn", lpn);
+			request.setAttribute("flist", list);
+			
 			request.getRequestDispatcher("views/post/postDetailView.jsp").forward(request,response);
 		}else {
 			request.setAttribute("errorMsg", "글 조회에 실패하셨습니다");

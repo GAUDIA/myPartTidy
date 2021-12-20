@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.TidyGames.post.model.vo.Post"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="com.TidyGames.post.model.vo.Post,
+				 com.TidyGames.post.model.vo.PostFile, java.util.ArrayList"
+%>
 <%
 	Post p = (Post)request.getAttribute("post");
 	Post lpn = (Post)request.getAttribute("lpn");
 	Post fpn = (Post)request.getAttribute("fpn");
+	ArrayList<PostFile> flist = (ArrayList<PostFile>)request.getAttribute("flist");
 %>
 <!DOCTYPE html>
 <html>
@@ -58,7 +62,6 @@ table {
 .like {
 	cursor:pointer;
 }
-img{display: none;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -127,26 +130,25 @@ img{display: none;}
 						</tr>
 						<tr>
 							<th></th>
-							<td colspan="2">
-								<img src="" width="300" height="300" style="display:none">
-							</td>
-							<td colspan="2">
-								<img src="" width="300" height="300">
-							</td>
-							<td colspan="2">
-								<img src="" width="300" height="300">
-							</td>
+							<% for(int i=0; i<flist.size(); i++) { %>
+								<td colspan="2">
+                        			<img src="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>" width="300" height="200" onerror="this.style.display='none'">
+                        		</td>
+                        	<% } %>
 						</tr>
 						<tr>
 							<td colspan="7" height="20"></td>
 						</tr>
 					</table>
-					<!--  if문으로 파일 있을 때만 보여지게 -->
 					<table>
-						<th>첨부파일</th>
-						<td><a>원본명.txt</a></td>
-						<td><a>원본명.jpg</a></td>
-						<td><a>원본명.png</a></td>
+						<th width="80">첨부파일</th>
+							<% if(flist.isEmpty()) { %>
+								<td>첨부파일이 없습니다</td>
+							<% } else { %>
+								<% for(int i=0; i<flist.size(); i++) { %>
+									<tr><td><a download="<%= flist.get(i).getFileOrigin() %>" href="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>"><%= flist.get(i).getFileOrigin() %></td></tr></a>
+								<% } %>
+							<% } %>
 					</table>
 				 </div>
 
@@ -198,11 +200,11 @@ img{display: none;}
 	<br>
 	<div align="center">
 		<% if(p.getPostNo() != fpn.getFirstPost()) { %>
-			<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()-1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
+			<a href="<%=contextPath%>/detail.po?num=<%=p.getPrevNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
 		<% } %>
 		<a href="<%=contextPath%>/list.po?cpage=1" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
 		<% if(p.getPostNo() != lpn.getLastPost()) { %>
-			<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()+1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
+			<a href="<%=contextPath%>/detail.po?num=<%=p.getNextNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
 		<% } %>
 	</div>
 	<br>

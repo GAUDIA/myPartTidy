@@ -48,18 +48,34 @@
 	</entry>
 	
 	<entry key="selectPostDetail">
-		SELECT
-		       POST_NO
-		     , POST_WRITER
-		     , POST_NAME
-		     , MEM_NICK
-		     , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD HH24:mm:SS') "POST_MODIFY"
-		     , POST_VIEW
-		     , POST_LIKE
-		     , POST_CONTENT
-		  FROM POST
-		  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+		SELECT *
+  		  FROM (
+  				SELECT
+		     		   POST_NO
+		             , POST_WRITER
+		             , POST_NAME
+		             , MEM_NICK
+		             , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD HH24:mm:SS') "POST_MODIFY"
+		             , POST_VIEW
+		             , POST_LIKE
+		             , POST_CONTENT
+		             , LAG(POST_NO) OVER(ORDER BY POST_NO DESC) PREV_NO
+		             , LEAD(POST_NO) OVER(ORDER BY POST_NO DESC) NEXT_NO
+		          FROM POST
+		          JOIN MEMBER ON (POST_WRITER = MEM_NO)
+        		 )
 		 WHERE POST_NO = ?
+	</entry>
+	
+	<entry key="selectPostFile">
+		SELECT
+		        FILE_NO
+		      , FILE_ORIGIN
+		      , FILE_CHANGE
+		      , FILE_PATH
+		   FROM POST_FILE
+		  WHERE FILE_STATUS = 'Y'
+		    AND REF_POST = ?
 	</entry>
 	
 	<entry key="firstPostNo">
