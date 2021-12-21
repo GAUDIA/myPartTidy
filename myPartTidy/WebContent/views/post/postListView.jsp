@@ -68,7 +68,7 @@
                 <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
                 	<a href="" class="btn btn-sm btn-danger">삭제</a>
                 <% } %>
-                <% if(loginUser != null) { %> <!-- 블락된 회원은 못 보게..어떻게 하지? -->
+                <% if(loginUser != null && loginUser.getMemAccess().equals("UNBLOCK")) { %> <!-- 블락된 회원은 못 보게..어떻게 하지? -->
                 	<a href="<%= contextPath %>/enroll.po?memId=<%= loginUser.getMemId() %>" class="btn btn-sm btn-info">글작성</a>
             	<% } %>
             </div>
@@ -181,7 +181,11 @@
 		<script>
 			$(function(){
 				$("#table>tbody>tr").click(function(){
+					<% if(loginUser.getMemAccess().equals("BLOCK")) {%>
+						alert('블락된 회원은 글 조회를 할 수 없습니다');
+					<% }else { %>
 					location.href = '<%=contextPath%>/detail.po?cpage=<%=currentPage%>&num=' + $(this).children().eq(0).text();
+					<% } %>
 				});
 
 			})

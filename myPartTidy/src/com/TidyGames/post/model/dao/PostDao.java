@@ -127,30 +127,6 @@ public class PostDao {
 	}
 	
 	
-	
-	public Member confirmMember(Connection conn, String memId) {
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("confirmMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memId);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				m = new Member();
-				m.setMemAccess(rset.getString("mem_access"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return m;
-	}
-	
 	/**
 	 * 글 상세 조회
 	 * @param conn
@@ -348,6 +324,31 @@ public class PostDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, postNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 글 수정
+	 * @param conn
+	 * @param p
+	 * @return
+	 */
+	public int updatePost(Connection conn, Post p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p.getPostName());
+			pstmt.setString(2, p.getPostContent());
+			pstmt.setInt(3, p.getPostNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

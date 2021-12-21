@@ -44,13 +44,6 @@ public class PostService {
 		return result;
 	}
 	
-	public Member confirmMember(String memId) {
-		Connection conn = getConnection();
-		Member m = pd.confirmMember(conn, memId);
-		close(conn);
-		return m;
-	}
-	
 	public Post selectPostDetail(int postNo) {
 		Connection conn = getConnection();
 		Post pf = pd.selectPostDetail(conn, postNo);
@@ -105,6 +98,18 @@ public class PostService {
 		}else {
 			rollback(conn);
 		}
+		return result;
+	}
+	
+	public int updatePost(Post p) {
+		Connection conn = getConnection();
+		int result = new PostDao().updatePost(conn, p);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
 		return result;
 	}
 	

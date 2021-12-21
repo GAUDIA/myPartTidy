@@ -40,13 +40,6 @@
 		   AND POST_STATUS = 'Y'
 	</entry>
 	
-	<entry key="confirmMember">
-		SELECT
-			   MEM_ACCESS
-		  FROM MEMBER
-		 WHERE MEM_ID = ?
-	</entry>
-	
 	<entry key="selectPostDetail">
 		SELECT *
   		  FROM (
@@ -63,6 +56,7 @@
 		             , LEAD(POST_NO) OVER(ORDER BY POST_NO) NEXT_NO
 		          FROM POST
 		          JOIN MEMBER ON (POST_WRITER = MEM_NO)
+		         WHERE POST_STATUS = 'Y'
         		 )
 		 WHERE POST_NO = ?
 	</entry>
@@ -148,6 +142,26 @@
 		   SET POST_STATUS = 'N'
 		 WHERE POST_NO = ?
 	</entry>
+	
+	<entry key="updatePost">
+	UPDATE
+		   POST
+	   SET POST_NAME = ?
+	     , POST_CONTENT = ?
+	 WHERE POST_NO = ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
