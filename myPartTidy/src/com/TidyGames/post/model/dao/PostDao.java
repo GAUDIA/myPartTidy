@@ -91,7 +91,7 @@ public class PostDao {
 								  rset.getString("post_name"),
 								  rset.getInt("post_view"),
 								  rset.getInt("post_like"),
-								  rset.getString("post_modify"),
+								  rset.getString("post_enroll"),
 								  rset.getString("post_notice")));
 			}	
 		} catch (SQLException e) {
@@ -149,7 +149,7 @@ public class PostDao {
 				p.setMemNo(rset.getInt("post_writer"));
 				p.setPostName(rset.getString("post_name"));
 				p.setPostWriter(rset.getString("mem_nick"));
-				p.setPostModify(rset.getString("post_modify"));
+				p.setPostEnroll(rset.getString("post_enroll"));
 				p.setPostView(rset.getInt("post_view"));
 				p.setPostLike(rset.getInt("post_like"));
 				p.setPostContent(rset.getString("post_content"));

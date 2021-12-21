@@ -108,7 +108,7 @@ table {
 							<th width="60">작성자</th>
 							<td width="100"><%=p.getPostWriter()%></td>
 							<th width="60">작성일</th>
-							<td width="200"><%=p.getPostModify()%></td>
+							<td width="200"><%=p.getPostEnroll()%></td>
 							<th width="70">조회수</th>
 							<td width="80"><%=p.getPostView()%></td>
 							<th width="70">추천수</th>
@@ -142,10 +142,11 @@ table {
 						</tr>
 					</table>
 					<table>
-						<th width="1000">첨부파일</th>
 							<% if(flist.isEmpty()) { %>
+								<th width="80">첨부파일</th>
 								<td>첨부파일이 없습니다</td>
 							<% } else { %>
+									<th width="1000">첨부파일</th>
 								<% for(int i=0; i<flist.size(); i++) { %>
 									<tr><td><a download="<%= flist.get(i).getFileOrigin() %>" href="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>"><%= flist.get(i).getFileOrigin() %></td></tr></a>
 								<% } %>
