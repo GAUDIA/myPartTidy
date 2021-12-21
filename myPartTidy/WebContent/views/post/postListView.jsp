@@ -72,7 +72,7 @@ tbody>tr:hover {
 
 #noticebtn {
 	color: white;
-	background: rgb(91, 173, 228);
+	background: lightseagreen;
 	border: none;
 	border-radius: 3px;
 }
@@ -93,76 +93,74 @@ tbody>tr:hover {
 		<br>
 		<br>
 
-		<form role="form" method="post">
+		<form action="<%= contextPath %>/deleteAll.po" method="post">
 			<input type="hidden" name="currentPage" value="<%=currentPage%>">
-		</form>
-
-		<div id="deletebtn" align="right" style="width: 1200px;">
-			<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-				<button id="adminDelete" data-toggle="modal" data-target="#deleteAdmin" class="btn btn-sm btn-danger">삭제</button>
-			<% } %>
-			<% if(loginUser != null && loginUser.getMemAccess().equals("UNBLOCK")) { %>
-				<a href="<%= contextPath %>/enroll.po?memId=<%= loginUser.getMemId() %>" class="btn btn-sm btn-info">글작성</a>
-			<% } %>
-		</div>
-
-		<br>
-
-		<table align="center" style="font-size: 12pt" class="table table-sm" id="table">
-
-			<thead style="background: rgb(80, 88, 83)">
+			<div id="deletebtn" align="right" style="width: 1200px;">
 				<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-					<th><input type="checkbox" id="check1"></th>
+					<input type="submit" class="btn btn-sm btn-danger" value="삭제">
 				<% } %>
-					<th width="100">글번호</th>
-					<th width="200">작성자</th>
-					<th width="500">제목</th>
-					<th width="100">조회수</th>
-					<th width="100">추천수</th>
-					<th width="150">작성일</th>
-			</thead>
-			<tbody>
-				<% if(list.isEmpty()) { %>
-					<tr>
-						<td colspan="7">조회된 게시글이 없습니다.</td>
-					</tr>
-				<% }else { %>
-					<% for(Post p : list) { %>
-						<tr>
-							<% if(p.getPostNotice().equals("Y")) { %>
-								<input type="hidden" value="<%=p.getPostNo()%>">
-							<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-								<td><input type="checkbox"></td>
-							<% } %>
-								<td><input type="button" value="공지" id="noticebtn" disabled></td>
-								<td><%=p.getPostWriter()%></td>
-								<td class="title"><%=p.getPostName()%></td>
-								<td><%=p.getPostView()%></td>
-								<td><%=p.getPostLike()%></td>
-								<td><%=p.getPostEnroll() %></td>
-						<% } %>
-						</tr>
+				<% if(loginUser != null && loginUser.getMemAccess().equals("UNBLOCK")) { %>
+					<a href="<%= contextPath %>/enroll.po?memId=<%= loginUser.getMemId() %>" class="btn btn-sm btn-info">글작성</a>
+				<% } %>
+			</div>
+	
+			<br>
+	
+			<table align="center" style="font-size: 12pt" class="table table-sm" id="table">
+	
+				<thead style="background: rgb(80, 88, 83)">
+					<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+						<th><input type="checkbox" id="check1"></th>
 					<% } %>
-					<% for(Post p : list) { %>
+						<th width="100">글번호</th>
+						<th width="200">작성자</th>
+						<th width="500">제목</th>
+						<th width="100">조회수</th>
+						<th width="100">추천수</th>
+						<th width="150">작성일</th>
+				</thead>
+				<tbody>
+					<% if(list.isEmpty()) { %>
 						<tr>
-							<% if(p.getPostNotice().equals("N")) { %>
-								<input type="hidden" value="<%=p.getPostNo()%>">
-							<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-								<td><input type="checkbox"></td>
-							<% } %>
-								<td><%=p.getPostNo()%></td>
-								<td><%=p.getPostWriter()%></td>
-								<td class="title"><%=p.getPostName()%></td>
-								<td><%=p.getPostView()%></td>
-								<td><%=p.getPostLike()%></td>
-								<td><%=p.getPostEnroll() %></td>
-							<% } %>
-					<% } %><%-- for --%>
+							<td colspan="7">조회된 게시글이 없습니다.</td>
 						</tr>
-				<% } %><%--else --%>
-			</tbody>
-		</table>
-
+					<% }else { %>
+						<% for(Post p : list) { %>
+							<tr>
+								<% if(p.getPostNotice().equals("Y")) { %>
+									<input type="hidden" value="<%=p.getPostNo()%>">
+								<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+									<td><input type="checkbox" name="deleteNum" value="<%=p.getPostNo()%>"></td>
+								<% } %>
+									<td><input type="button" value="공지" id="noticebtn" disabled></td>
+									<td><%=p.getPostWriter()%></td>
+									<td class="title"><%=p.getPostName()%></td>
+									<td><%=p.getPostView()%></td>
+									<td><%=p.getPostLike()%></td>
+									<td><%=p.getPostEnroll() %></td>
+							<% } %>
+							</tr>
+						<% } %>
+						<% for(Post p : list) { %>
+							<tr>
+								<% if(p.getPostNotice().equals("N")) { %>
+									<input type="hidden" value="<%=p.getPostNo()%>">
+								<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+									<td><input type="checkbox" name="deleteNum" value="<%=p.getPostNo()%>"></td>
+								<% } %>
+									<td><%=p.getPostNo()%></td>
+									<td><%=p.getPostWriter()%></td>
+									<td class="title"><%=p.getPostName()%></td>
+									<td><%=p.getPostView()%></td>
+									<td><%=p.getPostLike()%></td>
+									<td><%=p.getPostEnroll() %></td>
+								<% } %>
+						<% } %><%-- for --%>
+							</tr>
+					<% } %><%--else --%>
+				</tbody>
+			</table>
+		</form>
 		<br>
 		<br>
 
@@ -204,18 +202,6 @@ tbody>tr:hover {
 		</div>
 	</div>
 
-	<%-- deleteModal --%>
-	<div class="modal" id="deleteAdmin">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">선택된 게시물들을 일괄 삭제합니다.</div>
-				<div class="modal-footer">
-					<button id="deleteAll" class="btn btn-info">확인</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
 
@@ -234,11 +220,7 @@ tbody>tr:hover {
 		            }
 		        });	
 				
-				$("#deleteAll").click(function(){
-					var arr = [$(":checkbox", $("#table")).attr("checked", true).parents("input").val()];
-					console.log(arr);
-					
-				});
+				
 				
 			})
 			
