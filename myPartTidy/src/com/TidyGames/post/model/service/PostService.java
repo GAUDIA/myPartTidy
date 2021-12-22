@@ -115,16 +115,17 @@ public class PostService {
 	
 	// ==============================================================================
 	
-	public int selectMyPostCount(int memNo) {
+	public int nicknamePostCount(String word) {
 		Connection conn = getConnection();
-		int result = pd.selectPostListCount(conn);
+		int result = pd.nicknamePostCount(conn, word);
 		close(conn);
+		System.out.println("안뇽??");
 		return result;
 	}
 	
-	public ArrayList<Post> selectMyPost(PageInfo pi, int memNo) {
+	public ArrayList<Post> selectNicknamePost(PageInfo pi, String word) {
 		Connection conn = getConnection();
-		ArrayList<Post> list = pd.selectMyPost(conn, pi, memNo);
+		ArrayList<Post> list = pd.selectNicknamePost(conn, pi, word);
 		close(conn);
 		return list;
 	}

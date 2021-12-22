@@ -33,18 +33,41 @@ public class PostListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int listCount;		
-		int currentPage; 	
-		int pageLimit; 		
-		int viewLimit;	
+		int listCount = 0;		
+		int currentPage = 0; 	
+		int pageLimit = 10; 		
+		int viewLimit = 15;	
 		int maxPage;		
 		int startPage;		
 		int endPage;	
 		
-		listCount = new PostService().selectPostListCount();	
+		String search = request.getParameter("search");
+		String word = request.getParameter("word");
+		// 그냥 페이지만 요청하면 null이다!
+		
+		System.out.println(search);
+		System.out.println(word);
+		
+		// listCount 조건처리 (1)
+		if(search == null) {
+			listCount = new PostService().selectPostListCount();	
+		} else {
+			switch(search) {
+			case "r" : 
+			case "v" : 
+			case "l" : listCount = 3; break;
+			case "n" : listCount = new PostService().nicknamePostCount(word); break;
+			}
+		}
+		
+		
+		
+		
+		
+		System.out.println("listCount : " + listCount);
+		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		pageLimit = 10;
-		viewLimit = 15;
+		System.out.println("currentPage : " + currentPage);
 		maxPage = (int)Math.ceil((double)listCount / viewLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		endPage = startPage + pageLimit - 1;
@@ -54,8 +77,22 @@ public class PostListController extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
-		ArrayList<Post> list = new PostService().selectPostList(pi);
+		ArrayList<Post> list = new ArrayList<>();
 		
+		// listSelect 조건처리 (2)
+		if(search ==null) {
+			list = new PostService().selectPostList(pi);			
+		} else {
+			switch(search) {
+			case "r" : 
+			case "v" : 
+			case "l" : listCount = 3; break;
+			case "n" : list = new PostService().selectNicknamePost(pi, word);
+					   break;
+			}
+		}
+		
+	
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		

@@ -179,15 +179,20 @@
 	
 	<!-- 검색 ㅠ_ㅠ -->
 	
-	<entry key="selectMyPostCount">
+	<!-- 닉네임 검색 리스트카운트 -->
+	<entry key="nicknamePostCount">
 		SELECT
 		       COUNT(*) COUNT
 		  FROM POST
 		 WHERE POST_STATUS = 'Y'
-		   AND POST_WRITER = ?
+		   AND POST_WRITER = (
+		   						SELECT MEM_NO 
+		   						  FROM MEMBER 
+		   						 WHERE MEM_NICK = ?
+		   					  )
 	</entry>
 	
-	<entry key="selectMyPost">
+	<entry key="selectNicknamePost">
 		SELECT *
 		  FROM (
 		        SELECT ROWNUM RNUM, A.*
@@ -203,7 +208,11 @@
 						  FROM POST P
 						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
 						 WHERE P.POST_STATUS = 'Y'
-						   AND POST_WRITER = ?
+						   AND POST_WRITER = (
+		   										SELECT MEM_NO 
+		   						  				FROM MEMBER 
+		   						 				WHERE MEM_NICK = ?
+		   					  					)
 						 ORDER
 						    BY POST_NO DESC
 		                ) A

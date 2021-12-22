@@ -366,15 +366,15 @@ public class PostDao {
 	 * @param memNo
 	 * @return
 	 */
-	public int selectMyPostCount(Connection conn, int memNo) {
+	public int nicknamePostCount(Connection conn, String word) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectMyPostCount");
+		String sql = prop.getProperty("nicknamePostCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memNo);
+			pstmt.setString(1, word);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = rset.getInt("count");
@@ -385,15 +385,16 @@ public class PostDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println(result);
 		return result;
 	}
 	
-	public ArrayList<Post> selectMyPost(Connection conn, PageInfo pi, int memNo) {
+	public ArrayList<Post> selectNicknamePost(Connection conn, PageInfo pi, String word) {
 		
 		ArrayList<Post> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectMyPost");
+		String sql = prop.getProperty("selectNicknamePost");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -401,7 +402,7 @@ public class PostDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
 			int endRow = startRow + pi.getViewLimit() - 1;
 			
-			pstmt.setInt(1, memNo);
+			pstmt.setString(1, word);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 			

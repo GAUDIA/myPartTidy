@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.post.model.vo.Post"%>
+	import="com.TidyGames.common.model.vo.PageInfo, com.TidyGames.post.model.vo.PostObject, java.util.ArrayList, com.TidyGames.post.model.vo.Post"%>
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
@@ -162,37 +162,56 @@ tbody>tr:hover {
 			</table>
 		</form>
 		<br>
-		<form action="<%=contextPath %>/mypost.po">
-			<input type="hidden" name="cpage" value="<%=currentPage%>">
-			<input type="hidden" name="mynum" value="<%=loginUser.getMemNo()%>">
-			<button type="submit" class="btn btn-sm btn-success">작성글 보기</button>
-		</form>
 		<br>
+		<% if(request.getParameter("search") == null) { %>
 		<div class="paging-area" align="center">
-
-			<% if(currentPage != 1) { %>
-				<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';">&lt;</button>
-			<% } %>
-
-			<% for(int p=startPage; p<=endPage; p++){ %>
-
-				<% if(p == currentPage) { %>
-					<button disabled style="border-radius: 3px; background: orange; color: white;"><%= p %></button>
-				<% }else { %>
-					<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
+		
+				<% if(currentPage != 1) { %>
+					<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';">&lt;</button>
 				<% } %>
+	
+				<% for(int p=startPage; p<=endPage; p++){ %>
+	
+					<% if(p == currentPage) { %>
+						<button disabled style="border-radius: 3px; background: orange; color: white;"><%= p %></button>
+					<% }else { %>
+						<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
+					<% } %>
+				
+				<% } %>
+	
+				<% if(currentPage != maxPage) { %>
+					<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';">&gt;</button>
+				<% } %>
+			</div>
+			<% } else if (request.getParameter("search") != null) { %>
+				<div class="paging-area" align="center">
+				<% if(currentPage != 1) { %>
+					<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>';">&lt;</button>
+				<% } %>
+	
+				<% for(int p=startPage; p<=endPage; p++){ %>
+	
+					<% if(p == currentPage) { %>
+						<button disabled style="border-radius: 3px; background: orange; color: white;"><%= p %></button>
+					<% }else { %>
+						<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>';"><%= p %></button>
+					<% } %>
+	
+				<% } %>
+	
+				<% if(currentPage != maxPage) { %>
+					<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>&search=<%=request.getParameter("search")%>&word=<%=request.getParameter("word")%>';">&gt;</button>
+				<% } %>
+				</div>
+			<% }  %>
 
-			<% } %>
-
-			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';">&gt;</button>
-			<% } %>
-		</div>
 		<br>
 		<br>
 
 		<div class="search-area" align="center">
-			<form action="<%=contextPath %>/search.po" method="get">
+			<form action="<%=contextPath%>/list.po" method="get">
+				<input type="hidden" name="cpage" value="1">
 				<select name="search" style="height: 30px;">
 					<option value="r">최신순</option>
 					<option value="v">조회순</option>
