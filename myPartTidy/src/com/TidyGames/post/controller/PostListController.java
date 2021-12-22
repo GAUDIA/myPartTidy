@@ -45,6 +45,10 @@ public class PostListController extends HttpServlet {
 		String word = request.getParameter("word");
 		// 그냥 페이지만 요청하면 null이다!
 		
+		if(word==null) {
+			word = "";
+		}
+		
 		System.out.println(search);
 		System.out.println(word);
 		
@@ -55,7 +59,7 @@ public class PostListController extends HttpServlet {
 			switch(search) {
 			case "r" : 
 			case "v" : 
-			case "l" : listCount = 3; break;
+			case "l" : listCount = new PostService().searchPostCount(word); break;
 			case "n" : listCount = new PostService().nicknamePostCount(word); break;
 			}
 		}
@@ -86,8 +90,8 @@ public class PostListController extends HttpServlet {
 			switch(search) {
 			case "r" : 
 			case "v" : 
-			case "l" : listCount = 3; break;
-			case "n" : list = new PostService().selectNicknamePost(pi, word);
+			case "l" : 
+			case "n" : list = new PostService().selectSearchList(search, pi, word);
 					   break;
 			}
 		}

@@ -152,30 +152,6 @@
 	 WHERE POST_NO = ?
 	</entry>
 	
-	<entry key="searchPost">
-		SELECT *
-		  FROM (
-		        SELECT ROWNUM RNUM, A.*
-		          FROM (
-		                SELECT 
-						       POST_NO
-						     , MEM_NICK
-						     , POST_NAME
-						     , POST_VIEW
-						     , POST_LIKE
-						     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
-						     , POST_NOTICE
-						  FROM POST P
-						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
-						 WHERE P.POST_STATUS = 'Y'
-						   AND UPPER(COMPANY_NAME) LIKE UPPER('%' || ? || '%')
-						 ORDER
-						    BY POST_NO DESC
-		                ) A
-		        )
-		 WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	
 	
 	<!-- 검색 ㅠ_ㅠ -->
 	
@@ -192,6 +168,20 @@
 		   					  )
 	</entry>
 	
+	<!-- 그 외 검색 리스트 카운트 -->
+	<entry key="searchPostCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM POST
+		 WHERE POST_STATUS = 'Y' 
+		   AND UPPER(POST_NAME) 
+		  LIKE UPPER('%' || ? || '%')
+		    OR UPPER(POST_CONTENT)
+		  LIKE UPPER('%' || ? || '%')
+	</entry>
+	
+	
+	<!-- 닉네임 검색 조회 -->
 	<entry key="selectNicknamePost">
 		SELECT *
 		  FROM (
@@ -221,9 +211,90 @@
 	</entry>
 	
 	
+	<!-- 최신순 조회 -->
+	<entry key="searchRecentPost">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM (
+			                SELECT 
+							       POST_NO
+							     , MEM_NICK
+							     , POST_NAME
+							     , POST_VIEW
+							     , POST_LIKE
+							     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+							     , POST_NOTICE
+							  FROM POST P
+							  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+							 WHERE P.POST_STATUS = 'Y'
+							   AND UPPER(POST_NAME) 
+		 					  LIKE UPPER('%' || ? || '%')
+		    					OR UPPER(POST_CONTENT)
+		  					  LIKE UPPER('%' || ? || '%')
+							 ORDER
+							    BY POST_NO DESC
+			                ) A
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 조회순 조회 -->
+	<entry key="searchViewPost">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM (
+			                SELECT 
+							       POST_NO
+							     , MEM_NICK
+							     , POST_NAME
+							     , POST_VIEW
+							     , POST_LIKE
+							     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+							     , POST_NOTICE
+							  FROM POST P
+							  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+							 WHERE P.POST_STATUS = 'Y'
+							   AND UPPER(POST_NAME) 
+		 					  LIKE UPPER('%' || ? || '%')
+		    					OR UPPER(POST_CONTENT)
+		  					  LIKE UPPER('%' || ? || '%')
+							 ORDER
+							    BY POST_VIEW DESC
+			                ) A
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 	
-	
+	<!-- 추천순 조회 -->
+	<entry key="searchLikePost">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM (
+			                SELECT 
+							       POST_NO
+							     , MEM_NICK
+							     , POST_NAME
+							     , POST_VIEW
+							     , POST_LIKE
+							     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+							     , POST_NOTICE
+							  FROM POST P
+							  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+							 WHERE P.POST_STATUS = 'Y'
+							   AND UPPER(POST_NAME) 
+		 					  LIKE UPPER('%' || ? || '%')
+		    					OR UPPER(POST_CONTENT)
+		  					  LIKE UPPER('%' || ? || '%')
+							 ORDER
+							    BY POST_LIKE DESC
+			                ) A
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 	
 

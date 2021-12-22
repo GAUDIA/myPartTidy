@@ -119,17 +119,36 @@ public class PostService {
 		Connection conn = getConnection();
 		int result = pd.nicknamePostCount(conn, word);
 		close(conn);
-		System.out.println("안뇽??");
 		return result;
 	}
 	
-	public ArrayList<Post> selectNicknamePost(PageInfo pi, String word) {
+	
+	public int searchPostCount(String word) {
 		Connection conn = getConnection();
-		ArrayList<Post> list = pd.selectNicknamePost(conn, pi, word);
+		int result = pd.searchPostCount(conn, word);
+		close(conn);
+		return result;
+	}
+	
+	
+	public ArrayList<Post> selectSearchList(String search, PageInfo pi, String word) {
+		Connection conn = getConnection();
+		ArrayList<Post> list = new ArrayList<>();
+
+		switch(search) {
+		case "r" : list = pd.searchRecentPost(conn, pi, word);
+				   break;
+		case "v" : list = pd.searchViewPost(conn, pi, word);
+				   break;
+		case "l" : list = pd.searchLikePost(conn, pi, word);
+				   break;
+		case "n" : list = pd.selectNicknamePost(conn, pi, word);
+				   break;
+		}
+		
 		close(conn);
 		return list;
 	}
-	
 	
 	/*
 	public ArrayList<Post> searchPost(String search, String word, PageInfo pi) {

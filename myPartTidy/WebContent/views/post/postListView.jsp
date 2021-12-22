@@ -213,17 +213,21 @@ tbody>tr:hover {
 			<form action="<%=contextPath%>/list.po" method="get">
 				<input type="hidden" name="cpage" value="1">
 				<select name="search" style="height: 30px;">
-					<option value="r">최신순</option>
-					<option value="v">조회순</option>
-					<option value="l">추천순</option>
-					<option value="n">닉네임</option>
-				</select> <input type="text" name="word" style="width: 500px; height: 30px;">
+					<option value="r" ${(param.search == "r")?"selected":""}>최신순</option>
+					<option value="v" ${(param.search == "v")?"selected":""}>조회순</option>
+					<option value="l" ${(param.search == "l")?"selected":""}>추천순</option>
+					<option value="n" ${(param.search == "n")?"selected":""}>닉네임</option>
+				</select> <input type="text" name="word" value="${param.word}" style="width: 500px; height: 30px;">
 				<button type="submit" id="searchbtn">
 					<i class="fas fa-search"></i>
 				</button>
 			</form>
 		</div>
 	</div>
+	
+	<script>
+	
+	</script>
 
 
 	<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
