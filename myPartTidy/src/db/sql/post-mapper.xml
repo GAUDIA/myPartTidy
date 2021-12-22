@@ -152,10 +152,64 @@
 	 WHERE POST_NO = ?
 	</entry>
 	
+	<entry key="searchPost">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+						       POST_NO
+						     , MEM_NICK
+						     , POST_NAME
+						     , POST_VIEW
+						     , POST_LIKE
+						     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+						     , POST_NOTICE
+						  FROM POST P
+						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+						 WHERE P.POST_STATUS = 'Y'
+						   AND UPPER(COMPANY_NAME) LIKE UPPER('%' || ? || '%')
+						 ORDER
+						    BY POST_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 	
+	<!-- 검색 ㅠ_ㅠ -->
 	
+	<entry key="selectMyPostCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM POST
+		 WHERE POST_STATUS = 'Y'
+		   AND POST_WRITER = ?
+	</entry>
 	
+	<entry key="selectMyPost">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+						       POST_NO
+						     , MEM_NICK
+						     , POST_NAME
+						     , POST_VIEW
+						     , POST_LIKE
+						     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+						     , POST_NOTICE
+						  FROM POST P
+						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+						 WHERE P.POST_STATUS = 'Y'
+						   AND POST_WRITER = ?
+						 ORDER
+						    BY POST_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 	
 	

@@ -103,7 +103,7 @@ public class PostService {
 	
 	public int updatePost(Post p) {
 		Connection conn = getConnection();
-		int result = new PostDao().updatePost(conn, p);
+		int result = pd.updatePost(conn, p);
 		if(result > 0) {
 			commit(conn);
 		}else {
@@ -113,9 +113,31 @@ public class PostService {
 		return result;
 	}
 	
+	// ==============================================================================
+	
+	public int selectMyPostCount(int memNo) {
+		Connection conn = getConnection();
+		int result = pd.selectPostListCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Post> selectMyPost(PageInfo pi, int memNo) {
+		Connection conn = getConnection();
+		ArrayList<Post> list = pd.selectMyPost(conn, pi, memNo);
+		close(conn);
+		return list;
+	}
 	
 	
-	
+	/*
+	public ArrayList<Post> searchPost(String search, String word, PageInfo pi) {
+		Connection conn = getConnection();
+		ArrayList<Post> list = pd.searchPost(conn, search, word, pi);
+		close(conn);
+		return list;
+	}
+	*/
 	
 	
 	

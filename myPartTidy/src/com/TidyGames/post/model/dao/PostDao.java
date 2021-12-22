@@ -358,7 +358,103 @@ public class PostDao {
 		return result;
 	}
 	
+	// ==================================================
 	
+	/**
+	 * 내가 쓴 글 수 조회
+	 * @param conn
+	 * @param memNo
+	 * @return
+	 */
+	public int selectMyPostCount(Connection conn, int memNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyPostCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Post> selectMyPost(Connection conn, PageInfo pi, int memNo) {
+		
+		ArrayList<Post> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("post_no"),
+								  rset.getString("mem_nick"),
+								  rset.getString("post_name"),
+								  rset.getInt("post_view"),
+								  rset.getInt("post_like"),
+								  rset.getString("post_enroll"),
+								  rset.getString("post_notice")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	/*
+	public int searchPostCount(Connection conn, String search, String word) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchPostCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			if(search.equals("n")) {
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Post> searchPost(Connection conn, String search, String word, PageInfo pi) {
+		ArrayList<Post> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchPost");
+		
+		
+		return list;
+	}
+	*/
 		
 	
 

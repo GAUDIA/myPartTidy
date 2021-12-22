@@ -162,16 +162,14 @@ tbody>tr:hover {
 			</table>
 		</form>
 		<br>
-		<form action="<%=contextPath %>/mypost.po">
-			<input type="hidden" name="cpage" value="<%=currentPage%>">
-			<input type="hidden" name="mynum" value="<%=loginUser.getMemNo()%>">
-			<button type="submit" class="btn btn-sm btn-success">작성글 보기</button>
+		<form action="<%=contextPath %>/list.po?cpage=1">
+			<button type="submit" class="btn btn-sm btn-success">목록가기</button>
 		</form>
 		<br>
 		<div class="paging-area" align="center">
 
 			<% if(currentPage != 1) { %>
-				<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';">&lt;</button>
+				<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/mypost.po?cpage=<%=currentPage-1%>&mynum=<%=loginUser.getMemNo()%>';">&lt;</button>
 			<% } %>
 
 			<% for(int p=startPage; p<=endPage; p++){ %>
@@ -179,13 +177,13 @@ tbody>tr:hover {
 				<% if(p == currentPage) { %>
 					<button disabled style="border-radius: 3px; background: orange; color: white;"><%= p %></button>
 				<% }else { %>
-					<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
+					<button style="border-radius: 3px;" onclick="location.href='<%=contextPath%>/mypost.po?cpage=<%= p %>&mynum=<%=loginUser.getMemNo()%>';"><%= p %></button>
 				<% } %>
 
 			<% } %>
 
 			<% if(currentPage != maxPage) { %>
-				<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';">&gt;</button>
+				<button onclick="location.href='<%=contextPath%>/mypost.po?cpage=<%=currentPage+1%>'&mynum=<%=loginUser.getMemNo()%>';">&gt;</button>
 			<% } %>
 		</div>
 		<br>
