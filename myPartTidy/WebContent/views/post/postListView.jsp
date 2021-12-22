@@ -218,9 +218,7 @@ tbody>tr:hover {
 					<option value="l" ${(param.search == "l")?"selected":""}>추천순</option>
 					<option value="n" ${(param.search == "n")?"selected":""}>닉네임</option>
 				</select> <input type="text" name="word" value="${param.word}" style="width: 500px; height: 30px;">
-				<button type="submit" id="searchbtn">
-					<i class="fas fa-search"></i>
-				</button>
+				<button type="submit" id="searchbtn"><i class="fas fa-search"></i></button>
 			</form>
 		</div>
 	</div>
