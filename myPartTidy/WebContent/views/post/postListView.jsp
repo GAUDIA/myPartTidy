@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.TidyGames.common.model.vo.PageInfo, com.TidyGames.post.model.vo.PostObject, java.util.ArrayList, com.TidyGames.post.model.vo.Post"%>
+	import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.post.model.vo.Post"%>
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");

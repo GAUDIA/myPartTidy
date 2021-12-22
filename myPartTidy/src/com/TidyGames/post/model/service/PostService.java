@@ -150,14 +150,7 @@ public class PostService {
 		return list;
 	}
 	
-	/*
-	public ArrayList<Post> searchPost(String search, String word, PageInfo pi) {
-		Connection conn = getConnection();
-		ArrayList<Post> list = pd.searchPost(conn, search, word, pi);
-		close(conn);
-		return list;
-	}
-	*/
+	
 	
 	
 	

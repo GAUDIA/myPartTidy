@@ -49,8 +49,6 @@ public class PostListController extends HttpServlet {
 			word = "";
 		}
 		
-		System.out.println(search);
-		System.out.println(word);
 		
 		// listCount 조건처리 (1)
 		if(search == null) {
@@ -66,12 +64,7 @@ public class PostListController extends HttpServlet {
 		
 		
 		
-		
-		
-		System.out.println("listCount : " + listCount);
-		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		System.out.println("currentPage : " + currentPage);
 		maxPage = (int)Math.ceil((double)listCount / viewLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		endPage = startPage + pageLimit - 1;
