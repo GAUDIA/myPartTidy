@@ -385,7 +385,6 @@ public class PostDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(result);
 		return result;
 	}
 	
@@ -416,7 +415,6 @@ public class PostDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(result);
 		return result;
 	}
 	
