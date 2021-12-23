@@ -41,7 +41,7 @@ public class AdminDeletePost extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", "총 " + deleteNum.length + " 개의 게시물을 삭제하셨습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.po?cpage="+currentPage);
 		}else { 
-			request.setAttribute("errorMsg", "게시글 수정 실패!");
+			request.setAttribute("errorMsg", "글 삭제에 실패하셨습니다!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
 		}
 		
