@@ -296,6 +296,33 @@
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<!-- ================ Ajax =================== -->
+	
+	<entry key="selectReplyList">
+		SELECT
+		       REPLY_NO
+		     , MEM_NICK
+		     , REPLY_CONTENT
+		     , TO_CHAR(REPLY_ENROLL, 'YYYY/MM/DD HH:MI') "REPLY_ENROLL"
+		     , MEM_NO
+		  FROM REPLY
+		  JOIN MEMBER ON (REPLY_WRITER = MEM_NO)
+		 WHERE REPLY_STATUS = 'Y'
+		   AND REF_POST = ?
+		 ORDER
+		    BY REPLY_NO DESC
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 

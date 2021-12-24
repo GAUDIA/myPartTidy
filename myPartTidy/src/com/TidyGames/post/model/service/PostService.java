@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
-import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.post.model.dao.PostDao;
 import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.post.model.vo.PostFile;
+import com.TidyGames.post.model.vo.Reply;
 
 public class PostService {
 	
@@ -149,6 +149,20 @@ public class PostService {
 		close(conn);
 		return list;
 	}
+	
+	// ==================== Ajax =========================
+	
+	public ArrayList<Reply> selectReplyList(int postNo) {
+		Connection conn = getConnection();
+		ArrayList<Reply> list = new PostDao().selectReplyList(conn, postNo);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

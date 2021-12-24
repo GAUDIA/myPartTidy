@@ -1,6 +1,6 @@
 package com.TidyGames.post.model.dao;
 
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.TidyGames.common.model.vo.PageInfo;
-import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.post.model.vo.PostFile;
+import com.TidyGames.post.model.vo.Reply;
 
 public class PostDao {
 	
@@ -600,6 +600,48 @@ public class PostDao {
 		}
 		return list;
 	}
+	
+	// ====================== Ajax ===========================
+	
+	public ArrayList<Reply> selectReplyList(Connection conn, int postNo) {
+		ArrayList<Reply> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReplyList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Reply(rset.getInt("reply_no"),
+								   rset.getString("mem_nick"),
+								   rset.getString("reply_content"),
+								   rset.getString("reply_enroll"),
+								   rset.getInt("mem_no")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
