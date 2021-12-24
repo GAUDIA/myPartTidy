@@ -153,17 +153,12 @@ table {
 							<% } %>
 					</table>
 					<br>
-				 </div>
-
-					<table>
+					<table align="center">
 						<tr>
 							<td colspan="7" height="20"></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td><i class="far fa-comment-dots fa-lg"></i></td>
-							<th>댓글</th>
-							<td width="50">123</td>
+							<td colsapn="4"></td>
 							<td><i class="far fa-heart fa-lg"></i></td>
 							<th>추천</th>
 							<td><%=p.getPostLike()%></td>
@@ -172,8 +167,8 @@ table {
 							<td colspan="7" height="20"></td>
 						</tr>
 					</table>
-				
-
+				</div>
+				<br>
 				<div class="comment-view">
 					<table align="center">
 						<thead>
@@ -244,33 +239,35 @@ table {
 				</div>
 				<div class="modal-body">
 					<div>
-						<input type="radio" id="r1" name="report" value="1" checked><label
-							for="r1">욕설, 비방, 혐오</label>
+						<input type="radio" id="r1" name="report" value="1" checked>
+						<label for="r1">욕설, 비방, 혐오</label>
 					</div>
 					<div>
-						<input type="radio" id="r2" name="report" value="2"><label
-							for="r2">부적절한 홍보</label>
+						<input type="radio" id="r2" name="report" value="2">
+						<label for="r2">부적절한 홍보</label>
 					</div>
 					<div>
-						<input type="radio" id="r3" name="report" value="3"><label
-							for="r3">루머 유포</label>
+						<input type="radio" id="r3" name="report" value="3">
+						<label for="r3">루머 유포</label>
 					</div>
 					<div>
-						<input type="radio" id="r4" name="report" value="4"><label for="r4">음란, 청소년 유해</label>
+						<input type="radio" id="r4" name="report" value="4">
+						<label for="r4">음란, 청소년 유해</label>
 					</div>
 					<div>
-						<input type="radio" id="r5" name="report" value="5"><label for="r5">개인 정보 유출, 명예훼손</label>
+						<input type="radio" id="r5" name="report" value="5">
+						<label for="r5">개인 정보 유출, 명예훼손</label>
 					</div>
 					<div>
-						<input type="radio" id="r6" name="report" value="6"><label for="r6">도배, 스팸</label>
+						<input type="radio" id="r6" name="report" value="6">
+						<label for="r6">도배, 스팸</label>
 					</div>
 					<div>
 						<input type="radio" id="r7" name="report" value="7">기타(신고사유를 직접 입력해주세요)
 					</div>
 					<br>
 					<div>
-						<label for="r7"><textarea cols="60" rows="4"
-								style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
+						<label for="r7"><textarea cols="60" rows="4" style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" id="reportPno" name="reportPno" value="<%=p.getPostNo()%>">
@@ -281,52 +278,6 @@ table {
 				</div>
 			</div>
 		</div>
-			
-		<!-- 댓글 신고 버튼 모달 -->
-		<div class="modal" id="replyPostModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">신고 사유를 선택해주세요</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div>
-							<input type="radio" id="rr1" name="report2" value="1" checked><label
-								for="rr1">욕설, 비방, 혐오</label>
-						</div>
-						<div>
-							<input type="radio" id="rr2" name="report2" value="2"><label
-								for="rr2">부적절한 홍보</label>
-						</div>
-						<div>
-							<input type="radio" id="rr3" name="report2" value="3"><label
-								for="rr3">루머 유포</label>
-						</div>
-						<div>
-							<input type="radio" id="rr4" name="report2" value="4"><label for="rr4">음란, 청소년 유해</label>
-						</div>
-						<div>
-							<input type="radio" id="rr5" name="report2" value="5"><label for="rr5">개인 정보 유출, 명예훼손</label>
-						</div>
-						<div>
-							<input type="radio" id="rr6" name="report2" value="6"><label for="rr6">도배, 스팸</label>
-						</div>
-						<div>
-							<input type="radio" id="rr7" name="report2" value="7">기타(신고사유를 직접 입력해주세요)
-						</div>
-						<br>
-						<div>
-							<label for="rr7"><textarea cols="60" rows="4"
-									style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
-						</div>
-						<div class="modal-footer">
-							<button  id="replyReport" class="btn btn-info">신고완료</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		
 		
 		<script>
@@ -342,34 +293,47 @@ table {
 				
 				//글신고
 				$("#postReport").click(function(){
-					
+					// 신고사유
 					const reportReason = $(':radio[name="report"]:checked').val();
 					console.log(reportReason);
 					
-					
+					// 신고된 글 번호
 					const reportNo = $("#reportPno").val();
 					console.log(reportNo);
+					
+					// 신고된 회원 번호
 					const reportedMemNo = $("#reportMem").val();
 					console.log(reportedMemNo);
-					
 				});
 				
-				// 뭔 짓을 해도 댓글 신고는 안되네....
-				$("#replyReport").click(function(){
-					
-					const reportReason = $(':radio[name="report2"]:checked').val();
+				
+				
+				
+				
+				
+				$("#reportbtn").click(function(){
+					// 신고 사유 : 자동 1 (부트스트랩 modal이 안 먹힘 + 모달창 만들기엔 시간 부족)
+					const reportReason = 1;
 					console.log(reportReason);
-					const reportRno = $(".reportRno").val();
+					// 신고된 댓글 번호
+					const reportRno = $(this).parents().eq(0).val();
 					console.log(reportRno);
 					const reportRmem = $(".reportRmem").val();
 					console.log(reportRmem);
-					
 				});
 				
 				
 				
 				
-			})
+				
+			}) // 여기까지 제이쿼리
+			
+			
+			
+			function deleteReply(num) {
+				console.log(num);
+			}
+			
 			
 			// ajax로 해당 게시글에 딸린 댓글 목록 조회
 			function selectReplyList(){
@@ -381,28 +345,32 @@ table {
 						
 						for(let i=0; i<list.length; i++) {
 							result += "<input type='hidden' class='reportRno' value='" + list[i].replyNo + "'>"
-				               + "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
-				       + "<tr>"
-				       + "<th width='70'>" + list[i].replyWriter + "</th>"
-				                   + "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
-				                   + "</tr>";   
+				               		+ "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
+				       				+ "<tr>"
+				       				+ "<th width='70'>" + list[i].replyWriter + "</th>"
+				                   	+ "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
+				                   	+ "</tr>";
+				                   	
+				              if(<%=loginUser.getMemNo()%> == list[i].wrtierNo) {
+				            	result   +=  "<tr>"
+				                   + "<td></td>"
+						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-secondary' onclick='deleteReply(" + list[i].replyNo + ");'><i class='fas fa-trash-alt'></i></button></td>"
+						           + "</tr>"
+						           +  "<tr><td colspan='3' height='20'></td></tr>";
+				              } else {
+				            	  result   += "<tr>"
+				                   + "<td></td>"
+						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply();'><i class='far fa-angry'></i></button></td>"
+						           + "</tr>"
+						           +  "<tr><td colspan='3' height='20'></td></tr>";
+				              }
 							
 						}
+
 						
-						let result2 = "";
-						
-						for(let i=0; i<list.length; i++) {
-							
-							result2 += "<tr>"
-			                   + "<td></td>"
-					           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-					           + "<td width='50' align='right'><button class='btn btn-sm btn-danger' id='deletebtn'>삭제</button></td>"
-					           + "</tr>"
-					           +  "<tr><td colspan='3' height='20'></td></tr>";	     	
-						}
-						
-						$(".comment-view tbody").html(result + result2);
-						
+						$(".comment-view tbody").html(result);
 						
 					},error:function(){
 						console.log("댓글목록조회 ajax통신 실패");

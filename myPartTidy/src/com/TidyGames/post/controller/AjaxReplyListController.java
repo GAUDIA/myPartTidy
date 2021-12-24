@@ -1,4 +1,4 @@
-package com.TidyGames.company.controller;
+package com.TidyGames.post.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
