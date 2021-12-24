@@ -340,6 +340,35 @@
 		 WHERE REPLY_NO = ?
 	</entry>
 	
+	<entry key="statusLike">
+		SELECT 
+			   COUNT(*) COUNT
+	      FROM POST_LIKE
+	     WHERE LIKE_POST = ?
+	       AND LIKE_MEM = ?
+	</entry>
+	
+	<entry key="insertLike">
+		INSERT 
+		  INTO POST_LIKE
+		  (
+		    LIKE_POST
+		  , LIKE_MEM
+		  )
+		  VALUES
+		  (
+		    ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="increaseLike">
+		UPDATE
+		       POST
+		   SET POST_LIKE = POST_LIKE+1
+		 WHERE POST_NO = ?
+		   AND POST_STATUS = 'Y'
+	</entry>
 	
 	
 	

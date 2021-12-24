@@ -12,6 +12,7 @@ import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.post.model.dao.PostDao;
 import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.post.model.vo.PostFile;
+import com.TidyGames.post.model.vo.PostLike;
 import com.TidyGames.post.model.vo.Reply;
 
 public class PostService {
@@ -175,6 +176,37 @@ public class PostService {
 	public int deleteReply(int replyNo) {
 		Connection conn = getConnection();
 		int result = new PostDao().deleteReply(conn, replyNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int statusLike(PostLike pl) {
+		Connection conn = getConnection();
+		int result = new PostDao().statusLike(conn, pl);
+		close(conn);
+		return result;
+	}
+	
+	public int insertLike(PostLike pl) {
+		Connection conn = getConnection();
+		int result = new PostDao().insertLike(conn, pl);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int increaseLike(int postNo) {
+		Connection conn = getConnection();
+		int result = new PostDao().increaseLike(conn, postNo);
 		if(result > 0) {
 			commit(conn);
 		}else {

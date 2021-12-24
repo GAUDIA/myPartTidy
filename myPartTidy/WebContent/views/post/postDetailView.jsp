@@ -19,7 +19,9 @@
 #community {
 	color: orange;
 }
-
+#likezone:hover {
+	cursor:pointer;
+}
 .include-area {
 	width: 1500px;
 	margin: auto;
@@ -154,18 +156,23 @@ table {
 					</table>
 					<br>
 					<table align="center">
-						<tr>
-							<td colspan="7" height="20"></td>
-						</tr>
-						<tr>
-							<td colsapn="4"></td>
-							<td><i class="far fa-heart fa-lg"></i></td>
-							<th>추천</th>
-							<td><%=p.getPostLike()%></td>
-						</tr>
-						<tr>
-							<td colspan="7" height="20"></td>
-						</tr>
+							<tr>
+								<td colspan="7" height="20"></td>
+							</tr>
+							<tr>
+								<% if(loginUser != null) { %>
+									<td colsapn="4"></td>
+									<td id="likezone" onclick="clickHeart();"></td>
+									<th>추천</th>
+									<td id="licount"><%=p.getPostLike()%></td>
+								<% } else { %>
+									<td colsapn="4"></td>
+									<td colspan="3">로그인한 이용자만 추천할 수 있습니다</td>
+								<% } %>
+							</tr>
+							<tr>
+								<td colspan="7" height="20"></td>
+							</tr>
 					</table>
 				</div>
 				<br>
@@ -292,13 +299,13 @@ table {
 		<script>
 			$(function(){
 				
+				selectLikeStatus();
 				selectReplyList(); //모든 요소가 만들어진 뒤 바로 호출하는 메소드
 				
 				// window 객체에서 제공하는 setInterval(주기적으로실행시킬함수, ms단위) < 자스에서 배움
 				// 1초 간격마다 댓글 목록 실행
 				setInterval(selectReplyList, 1000);
 				
-				selectLikeStatus();
 				
 				
 				$("#deletePost").click(function(){
@@ -398,7 +405,6 @@ table {
 			
 			
 			
-			
 			// ajax로 해당 게시글에 딸린 댓글 목록 조회
 			function selectReplyList(){
 				$.ajax({
@@ -429,21 +435,74 @@ table {
 						           + "</tr>"
 						           +  "<tr><td colspan='3' height='20'></td></tr>";
 				              }
-							
 						}
-
-						
 						$(".comment-view tbody").html(result);
-						
 					},error:function(){
 						console.log("댓글목록조회 ajax통신 실패");
 					}
 				})
 			};
 			
-		
+			// ======================= 좋아요 ========================
+
+			// 좋아요 상태 조회 
+			function selectLikeStatus(){
+				
+				$.ajax({
+					url:"lstatus.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						if(result>0){
+							$("#likezone").html("<i class='fas fa-heart fa-lg' style='color:red' onclick='deleteLike();'></i>");
+						}else{
+							$("#likezone").html("<i class='far fa-heart fa-lg' onclick='insertLike();'></i>");
+						}
+					},error:function(){
+						console.log("좋아요 상태 조회 ajax 통신 실패");
+					}
+				})
+			};
+
+			// 좋아요 클릭
+			function insertLike(){
+					$.ajax({
+					url:"insertlike.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						if(result>0){
+							$("#licount").text('<%=p.getPostLike()+1%>');
+							selectLikeStatus();
+						}else{
+							alert('글 추천 실패 ㅜㅜ')
+						}
+					}, error:function(){
+						console.log("좋아요 클릭 ajax 통신 실패");
+					}
+				})
+			};
 			
-		
+
+
+			// 좋아요 해제
+			function deleteLike(){
+					$.ajax({
+					url:"deletelike.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						if(result>0){
+							$("#licount").text('<%=p.getPostLike()+1%>');
+							selectLikeStatus();
+						}else{
+							alert('글 추천 실패 ㅜㅜ')
+						}
+					}, error:function(){
+						console.log("좋아요 클릭 ajax 통신 실패");
+					}
+				})
+			};
+			
+			
+			
 			
 		</script>
 </body>

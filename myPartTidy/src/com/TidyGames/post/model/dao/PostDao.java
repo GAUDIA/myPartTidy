@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.post.model.vo.PostFile;
+import com.TidyGames.post.model.vo.PostLike;
 import com.TidyGames.post.model.vo.Reply;
 
 public class PostDao {
@@ -659,6 +660,12 @@ public class PostDao {
 		return result;
 	}
 	
+	/**
+	 * 댓글 삭제
+	 * @param conn
+	 * @param replyNo
+	 * @return
+	 */
 	public int deleteReply(Connection conn, int replyNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -675,9 +682,73 @@ public class PostDao {
 		return result;
 	}
 	
+	/**
+	 * 좋아요 상태 조회
+	 * @param conn
+	 * @param pl
+	 * @return
+	 */
+	public int statusLike(Connection conn, PostLike pl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("statusLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pl.getLikePost());
+			pstmt.setInt(2, pl.getLikeMem());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 좋아요 클릭
+	 * @param conn
+	 * @param pl
+	 * @return
+	 */
+	public int insertLike(Connection conn, PostLike pl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pl.getLikePost());
+			pstmt.setInt(2, pl.getLikeMem());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
-	
+	public int increaseLike(Connection conn, int postNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
