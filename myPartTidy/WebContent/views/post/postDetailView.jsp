@@ -181,8 +181,8 @@ table {
 								<td colspan="2" width="870">
 									<textarea rows="3" style="resize:none"></textarea>
 								</td>
-								<td colspan="2" style="text-align:center">
-									<button class="btn btn-secondary">댓글등록</button>
+								<td style="text-align:center">
+									<button class="btn btn-dark"><i class="fas fa-comment-dots fa-lg"></i></button>
 								</td>
 							</tr>
 							<tr>
@@ -282,7 +282,7 @@ table {
 			</div>
 		</div>
 			
-		<!-- 글 신고 버튼 모달 -->
+		<!-- 댓글 신고 버튼 모달 -->
 		<div class="modal" id="replyPostModal">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -377,29 +377,40 @@ table {
 					url:"rlist.po",
 					data:{pno:<%=p.getPostNo()%>},
 					success:function(list){
-						
-						console.log(list);
 						let result = "";
+						
 						for(let i=0; i<list.length; i++) {
 							result += "<input type='hidden' class='reportRno' value='" + list[i].replyNo + "'>"
-						           + "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
-								   + "<tr><th width='70'>" + list[i].replyWriter + "</th>"
-					               + "<td width='800'>" + list[i].replyContent + "</td>"
-					               + "<td colspan='2' width='50' align='right'><button class='btn btn-sm btn-danger'>삭제</button></td></tr><td></td>"   
-					               + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-					               + "<td colspan='2' align='right'><button class='btn btn-sm btn-warning' data-toggle='modal' data-target='#replyPostModal'>신고</button></td>"
-								   +  "<tr><td colspan='4' height='20'></td></tr>"				   
+				               + "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
+				       + "<tr>"
+				       + "<th width='70'>" + list[i].replyWriter + "</th>"
+				                   + "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
+				                   + "</tr>";   
+							
 						}
 						
-						$(".comment-view tbody").html(result);					
+						let result2 = "";
+						
+						for(let i=0; i<list.length; i++) {
+							
+							result2 += "<tr>"
+			                   + "<td></td>"
+					           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+					           + "<td width='50' align='right'><button class='btn btn-sm btn-danger' id='deletebtn'>삭제</button></td>"
+					           + "</tr>"
+					           +  "<tr><td colspan='3' height='20'></td></tr>";	     	
+						}
+						
+						$(".comment-view tbody").html(result + result2);
+						
 						
 					},error:function(){
 						console.log("댓글목록조회 ajax통신 실패");
 					}
 				})
-					
-				
-			}
+			};
+			
+		
 			
 		</script>
 </body>
