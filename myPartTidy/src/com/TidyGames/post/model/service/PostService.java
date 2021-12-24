@@ -160,6 +160,32 @@ public class PostService {
 	}
 	
 	
+	public int insertReply(Reply r) {
+		Connection conn = getConnection();
+		int result = new PostDao().insertReply(conn, r);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteReply(int replyNo) {
+		Connection conn = getConnection();
+		int result = new PostDao().deleteReply(conn, replyNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+	
 	
 	
 	

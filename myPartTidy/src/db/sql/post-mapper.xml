@@ -50,7 +50,9 @@
 		             , MEM_NICK
 		             , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD HH24:mm:SS') "POST_ENROLL"
 		             , POST_VIEW
-		             , POST_LIKE
+		             , (SELECT COUNT(*) COUNT
+  						FROM POST_LIKE
+ 						WHERE LIKE_POST = ?) "POST_LIKE"
 		             , POST_CONTENT
 		             , LAG(POST_NO) OVER(ORDER BY POST_NO) PREV_NO
 		             , LEAD(POST_NO) OVER(ORDER BY POST_NO) NEXT_NO
@@ -296,7 +298,7 @@
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<!-- ================ Ajax =================== -->
+	<!-- ================ 댓글 좋아요 =================== -->
 	
 	<entry key="selectReplyList">
 		SELECT
@@ -313,7 +315,30 @@
 		    BY REPLY_NO DESC
 	</entry>
 	
+	<entry key="insertReply">
+		INSERT 
+			  INTO REPLY
+			  (
+			    REPLY_NO
+			  , REPLY_WRITER
+			  , REF_POST
+			  , REPLY_CONTENT
+			  )
+			  VALUES
+			  (
+			    SEQ_RNO.NEXTVAL
+			  , ?
+			  , ?
+			  , ?
+			  )
+	</entry>
 	
+	<entry key="deleteReply">
+		UPDATE
+		       REPLY
+		   SET REPLY_STATUS = 'N'
+		 WHERE REPLY_NO = ?
+	</entry>
 	
 	
 	

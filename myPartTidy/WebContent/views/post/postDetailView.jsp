@@ -173,15 +173,24 @@ table {
 					<table align="center">
 						<thead>
 							<tr>
-								<td colspan="2" width="870">
-									<textarea rows="3" style="resize:none"></textarea>
-								</td>
-								<td style="text-align:center">
-									<button class="btn btn-dark"><i class="fas fa-comment-dots fa-lg"></i></button>
-								</td>
+								<% if(loginUser != null) { %>
+									<td colspan="2" width="870">
+										<textarea rows="3" style="resize:none" id="replyZone" placeholder="댓글을 작성해주세요!"></textarea>
+									</td>
+									<td style="text-align:center">
+										<button class="btn btn-dark" onclick="insertReply();"><i class="fas fa-comment-dots fa-lg"></i></button>
+									</td>
+								<% }else { %>
+									<td colspan="2" width="870">
+										<textarea rows="3" style="resize:none" readonly>로그인 후 이용 가능한 서비스입니다</textarea>
+									</td>
+									<td style="text-align:center">
+										<button class="btn btn-dark" disabled><i class="fas fa-comment-dots fa-lg"></i></button>
+									</td>
+								<% } %>
 							</tr>
 							<tr>
-								<td colspan="4" height="20"></td>
+								<td colspan="3" height="20"></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -285,6 +294,13 @@ table {
 				
 				selectReplyList(); //모든 요소가 만들어진 뒤 바로 호출하는 메소드
 				
+				// window 객체에서 제공하는 setInterval(주기적으로실행시킬함수, ms단위) < 자스에서 배움
+				// 1초 간격마다 댓글 목록 실행
+				setInterval(selectReplyList, 1000);
+				
+				selectLikeStatus();
+				
+				
 				$("#deletePost").click(function(){
 					var url = "<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>";
 					location.href = url;
@@ -322,18 +338,65 @@ table {
 					console.log(reportRmem);
 				});
 				
-				
-				
-				
-				
-			}) // 여기까지 제이쿼리
+			}); // 여기까지 제이쿼리
+			
+			// 댓글 신고
+			function reportReply(renum) {
+				if(confirm('해당 댓글을 신고하시겠습니까?')==true){
+					alert('신고 처리가 완료되었습니다!');
+				}else{
+					return false;
+				}
+			};
 			
 			
-			// 댓글 삭제
+			// 댓글 작성
+			function insertReply(){
+				$.ajax({
+					url:"rinsert.po",
+					data:{
+						rcontent:$("#replyZone").val(),
+						pno:<%=p.getPostNo()%>
+				// userNo ~ loginUser.getUserNo() 여기서 안 적는 이유는 로그인하지 않은 상태로 진입하면 널포인터익셉션 발생할 수 있어서 서블릿에서 뽑음
+				// 근데 난 아예 커뮤니티를 로그인하지 않으면 사용 못하게 하고 싶은데 일단은 이렇게 해본다
+					},
+					type:"post",
+					success:function(result){
+						if(result > 0) {
+							selectReplyList();
+							$("#replyZone").val("");
+						}
+					},error:function(){
+						console.log("댓글작성용 ajax 통신 실패");
+					}	
+				})
+			};
+			
+			
+			// ajax로 댓글 삭제
 			function deleteReply(renum) {
 				
-				console.log(num);
-			}
+				if(confirm('댓글을 삭제하시겠습니까?')==true){
+					alert('댓글이 삭제되었습니다');
+				}else{
+					return false;
+				}
+				
+				$.ajax({
+					url:"rdelete.po",
+					data:{renum:renum},
+					success:function(result){
+						if(result > 0){
+							selectReplyList();
+						}
+					}, error:function(){
+						console.log("댓글작성용 ajax 통신 실패");
+					}
+				})
+			};
+			
+			
+			
 			
 			
 			// ajax로 해당 게시글에 딸린 댓글 목록 조회
@@ -345,8 +408,7 @@ table {
 						let result = "";
 						
 						for(let i=0; i<list.length; i++) {
-							result += "<input type='hidden' class='reportRno' value='" + list[i].replyNo + "'>"
-				               		+ "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
+							result += "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
 				       				+ "<tr>"
 				       				+ "<th width='70'>" + list[i].replyWriter + "</th>"
 				                   	+ "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
@@ -363,7 +425,7 @@ table {
 				            	  result   += "<tr>"
 				                   + "<td></td>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply();'><i class='far fa-angry'></i></button></td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply(" + list[i].replyNo + ");'><i class='far fa-angry'></i></button></td>"
 						           + "</tr>"
 						           +  "<tr><td colspan='3' height='20'></td></tr>";
 				              }
@@ -378,6 +440,8 @@ table {
 					}
 				})
 			};
+			
+		
 			
 		
 			

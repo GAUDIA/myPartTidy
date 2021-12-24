@@ -142,6 +142,7 @@ public class PostDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, postNo);
+			pstmt.setInt(2, postNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				p = new Post();
@@ -603,6 +604,12 @@ public class PostDao {
 	
 	// ====================== Ajax ===========================
 	
+	/**
+	 * 댓글 조회
+	 * @param conn
+	 * @param postNo
+	 * @return
+	 */
 	public ArrayList<Reply> selectReplyList(Connection conn, int postNo) {
 		ArrayList<Reply> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -628,6 +635,45 @@ public class PostDao {
 		return list;
 	}
 	
+	/**
+	 * 댓글 작성
+	 * @param conn
+	 * @param r
+	 * @return
+	 */
+	public int insertReply(Connection conn, Reply r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReply");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(r.getReplyWriter()));
+			pstmt.setInt(2, r.getRefPostNo());
+			pstmt.setString(3, r.getReplyContent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteReply(Connection conn, int replyNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReply");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, replyNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
