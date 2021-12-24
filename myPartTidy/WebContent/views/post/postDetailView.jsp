@@ -329,8 +329,9 @@ table {
 			}) // 여기까지 제이쿼리
 			
 			
-			
-			function deleteReply(num) {
+			// 댓글 삭제
+			function deleteReply(renum) {
+				
 				console.log(num);
 			}
 			
