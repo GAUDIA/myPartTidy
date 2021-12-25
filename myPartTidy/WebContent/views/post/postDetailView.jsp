@@ -74,8 +74,6 @@ table {
 		<%@ include file="../common/navibar.jsp"%>
 	</div>
 	
-	
-
 	<div class="outer">
 
 		<h2>
@@ -142,15 +140,15 @@ table {
 						</tr>
 					</table>
 					<table>
-							<% if(flist.isEmpty()) { %>
-								<th width="80">첨부파일</th>
-								<td>첨부파일이 없습니다</td>
-							<% } else { %>
-									<th width="1000">첨부파일</th>
-								<% for(int i=0; i<flist.size(); i++) { %>
-									<tr><td><a download="<%= flist.get(i).getFileOrigin() %>" href="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>"><%= flist.get(i).getFileOrigin() %></td></tr></a>
-								<% } %>
+						<% if(flist.isEmpty()) { %>
+							<th width="80">첨부파일</th>
+							<td>첨부파일이 없습니다</td>
+						<% } else { %>
+								<th width="1000">첨부파일</th>
+							<% for(int i=0; i<flist.size(); i++) { %>
+								<tr><td><a download="<%= flist.get(i).getFileOrigin() %>" href="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>"><%= flist.get(i).getFileOrigin() %></a></td></tr>
 							<% } %>
+						<% } %>
 					</table>
 					<br>
 					<table align="center">
@@ -296,7 +294,6 @@ table {
 		
 		<script>
 			$(function(){
-				
 				selectLikeStatus();
 				selectLikeCount();
 				selectReplyList(); //모든 요소가 만들어진 뒤 바로 호출하는 메소드
@@ -305,13 +302,10 @@ table {
 				// 1초 간격마다 댓글 목록 실행
 				setInterval(selectReplyList, 1000);
 				
-				
-				
 				$("#deletePost").click(function(){
 					var url = "<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>";
 					location.href = url;
 				});
-				
 				
 				//글신고
 				$("#postReport").click(function(){
@@ -327,10 +321,6 @@ table {
 					const reportedMemNo = $("#reportMem").val();
 					console.log(reportedMemNo);
 				});
-				
-				
-				
-				
 				
 				
 				$("#reportbtn").click(function(){
@@ -354,7 +344,6 @@ table {
 					return false;
 				}
 			};
-			
 			
 			// 댓글 작성
 			function insertReply(){
@@ -400,10 +389,7 @@ table {
 					}
 				})
 			};
-			
-			
-			
-			
+					
 			// ajax로 해당 게시글에 딸린 댓글 목록 조회
 			function selectReplyList(){
 				$.ajax({
@@ -491,8 +477,6 @@ table {
 					}
 				})
 			};
-			
-
 
 			// 좋아요 해제
 			function deleteLike(){
@@ -511,9 +495,7 @@ table {
 					}
 				})
 			};
-			
-			
-			
+					
 			
 		</script>
 </body>
