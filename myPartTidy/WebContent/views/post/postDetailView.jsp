@@ -112,9 +112,7 @@ table {
 							<th width="60">작성일</th>
 							<td width="200"><%=p.getPostEnroll()%></td>
 							<th width="70">조회수</th>
-							<td width="80"><%=p.getPostView()%></td>
-							<th width="70">추천수</th>
-							<td width="80"><%=p.getPostLike()%></td>
+							<td width="80" colspan="3"><%=p.getPostView()%></td>
 						</tr>
 						<tr>
 							<td colspan="8" height="20"></td>
@@ -164,7 +162,7 @@ table {
 									<td colsapn="4"></td>
 									<td id="likezone" onclick="clickHeart();"></td>
 									<th>추천</th>
-									<td id="licount"><%=p.getPostLike()%></td>
+									<td id="licount"></td>
 								<% } else { %>
 									<td colsapn="4"></td>
 									<td colspan="3">로그인한 이용자만 추천할 수 있습니다</td>
@@ -300,6 +298,7 @@ table {
 			$(function(){
 				
 				selectLikeStatus();
+				selectLikeCount();
 				selectReplyList(); //모든 요소가 만들어진 뒤 바로 호출하는 메소드
 				
 				// window 객체에서 제공하는 setInterval(주기적으로실행시킬함수, ms단위) < 자스에서 배움
@@ -444,6 +443,18 @@ table {
 			};
 			
 			// ======================= 좋아요 ========================
+			
+			// 좋아요 수 조회
+			function selectLikeCount(){
+				$.ajax({
+					url:"lcount.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						$("#licount").html(result);
+					}
+				})
+			};
+			
 
 			// 좋아요 상태 조회 
 			function selectLikeStatus(){
@@ -470,7 +481,7 @@ table {
 					data:{pno:<%=p.getPostNo()%>},
 					success:function(result){
 						if(result>0){
-							$("#licount").text('<%=p.getPostLike()+1%>');
+							selectLikeCount();
 							selectLikeStatus();
 						}else{
 							alert('글 추천 실패 ㅜㅜ')
@@ -490,13 +501,13 @@ table {
 					data:{pno:<%=p.getPostNo()%>},
 					success:function(result){
 						if(result>0){
-							$("#licount").text('<%=p.getPostLike()+1%>');
+							selectLikeCount();
 							selectLikeStatus();
 						}else{
-							alert('글 추천 실패 ㅜㅜ')
+							alert('글 추천 해제 실패 ㅜㅜ')
 						}
 					}, error:function(){
-						console.log("좋아요 클릭 ajax 통신 실패");
+						console.log("좋아요 해제 ajax 통신 실패");
 					}
 				})
 			};

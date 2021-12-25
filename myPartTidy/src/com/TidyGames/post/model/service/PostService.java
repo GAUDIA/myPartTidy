@@ -192,6 +192,13 @@ public class PostService {
 		return result;
 	}
 	
+	public int likeCount(int postNo) {
+		Connection conn = getConnection();
+		int result = new PostDao().likeCount(conn, postNo);
+		close(conn);
+		return result;
+	}
+	
 	public int insertLike(PostLike pl) {
 		Connection conn = getConnection();
 		int result = new PostDao().insertLike(conn, pl);
@@ -207,6 +214,30 @@ public class PostService {
 	public int increaseLike(int postNo) {
 		Connection conn = getConnection();
 		int result = new PostDao().increaseLike(conn, postNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteLike(PostLike pl) {
+		Connection conn = getConnection();
+		int result = new PostDao().deleteLike(conn, pl);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int decreaseLike(int postNo) {
+		Connection conn = getConnection();
+		int result = new PostDao().decreaseLike(conn, postNo);
 		if(result > 0) {
 			commit(conn);
 		}else {

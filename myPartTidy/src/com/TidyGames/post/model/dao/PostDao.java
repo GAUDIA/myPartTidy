@@ -710,6 +710,27 @@ public class PostDao {
 		return result;
 	}
 	
+	public int likeCount(Connection conn, int postNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("likeCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	/**
 	 * 좋아요 클릭
 	 * @param conn
@@ -738,6 +759,46 @@ public class PostDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 좋아요 해제
+	 * @param conn
+	 * @param pl
+	 * @return
+	 */
+	public int deleteLike(Connection conn, PostLike pl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pl.getLikePost());
+			pstmt.setInt(2, pl.getLikeMem());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public int decreaseLike(Connection conn, int postNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("decreaseLike");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, postNo);
