@@ -334,16 +334,27 @@ table {
 					console.log(reportRmem);
 				});
 				
+				
 			}); // 여기까지 제이쿼리
 			
-			// 댓글 신고
-			function reportReply(renum) {
-				if(confirm('해당 댓글을 신고하시겠습니까?')==true){
-					alert('신고 처리가 완료되었습니다!');
-				}else{
-					return false;
-				}
+			
+			// 댓글 신고 (댓글 번호)
+			function reportReply([renum,remem]) {
+				
+				console.log(renum);
+				console.log(remem);
+				
+				
 			};
+			
+			
+				// if(confirm('해당 댓글을 신고하시겠습니까?')==true){
+				// 	alert('신고 처리가 완료되었습니다!');
+				// }else{
+				// 	return false;
+				// }
+			
+			
 			
 			// 댓글 작성
 			function insertReply(){
@@ -399,13 +410,12 @@ table {
 						let result = "";
 						
 						for(let i=0; i<list.length; i++) {
-							result += "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
-				       				+ "<tr>"
+							result += "<tr>"
 				       				+ "<th width='70'>" + list[i].replyWriter + "</th>"
 				                   	+ "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
 				                   	+ "</tr>";
 				                   	
-				              if(<%=loginUser.getMemNo()%> == list[i].wrtierNo) {
+				              if(<%=loginUser.getMemNo()%> == list[i].writerNo) {
 				            	result   +=  "<tr>"
 				                   + "<td></td>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
@@ -416,7 +426,7 @@ table {
 				            	  result   += "<tr>"
 				                   + "<td></td>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply(" + list[i].replyNo + ");'><i class='far fa-angry'></i></button></td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply([" + list[i].replyNo + "," + list[i].writerNo + "])'><i class='far fa-angry'></i></button></td>"
 						           + "</tr>"
 						           +  "<tr><td colspan='3' height='20'></td></tr>";
 				              }
