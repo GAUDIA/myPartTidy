@@ -77,6 +77,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- icon -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<% if(alertMsg != null){  %>
@@ -101,8 +102,8 @@
             </form>
         </div>
         <div id="top3">
-            <a href="<%= request.getContextPath()%>/cart.pa"><i class="fas fa-shopping-cart fa-lg"></i></a>
             <% if(loginUser != null ) { %>
+            	<a href="<%= request.getContextPath()%>/cart.pa"><i class="fas fa-shopping-cart fa-lg"></i></a>
             	<a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } else { %>
                 <a href="<%= contextPath %>/login.me" id="usericon"><i class="far fa-user fa-lg"></i></a>

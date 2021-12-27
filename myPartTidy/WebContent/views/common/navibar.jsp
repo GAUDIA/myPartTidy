@@ -34,32 +34,30 @@
 <body>
 
     <div class="navi-area" align="center">
-        <div class="menu"><a href="" id="notice">NOTICE</a></div>
+        <div class="menu"><a href="<%=request.getContextPath()%>/notice.no?cpage=1" id="notice">NOTICE</a></div>
         <div class="menu"><div id="library">LIBRARY</div>></div>
         <div class="menu"><div id="community">COMMUNITY</div></div>
-        <div class="menu"><a href="" id="help">HELP</a></div>
+        <div class="menu"><a href="<%=request.getContextPath()%>/faqList.fa" id="faq">HELP</a></div>
     </div>
     
     <script>
     	$(function(){
     		$("#community").click(function(){
     			<% if(loginUser != null) { %>
-    			location.href = '<%= request.getContextPath() %>/list.po?cpage=1';
+    				location.href = '<%= request.getContextPath() %>/list.po?cpage=1';
 	    		<%} else {%>
-    			alert('로그인한 회원만 이용할 수 있는 메뉴입니다.');
+	    			Swal.fire('로그인한 회원만 이용할 수 있는 메뉴입니다.');
     			<% } %>
     		});
     		
     		$("#library").click(function(){
     			<% if(loginUser != null) { %>
-    			location.href = '<%= request.getContextPath() %>/library.me';
+    				location.href = '<%= request.getContextPath() %>/library.me';
 	    		<%} else {%>
-    			alert('로그인한 회원만 이용할 수 있는 메뉴입니다.');
+	    			Swal.fire('로그인한 회원만 이용할 수 있는 메뉴입니다.');
     			<% } %>
     		});
     	})
-    	
-
     </script>
 
 </body>
