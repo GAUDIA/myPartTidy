@@ -142,7 +142,7 @@ table {
 					<table>
 						<% if(flist.isEmpty()) { %>
 							<th width="80">첨부파일</th>
-							<td>첨부파일이 없습니다</td>
+							<td style='font-size:smaller'>첨부파일이 없습니다</td>
 						<% } else { %>
 								<th width="1000">첨부파일</th>
 							<% for(int i=0; i<flist.size(); i++) { %>
@@ -177,14 +177,14 @@ table {
 						<thead>
 							<tr>
 								<% if(loginUser != null) { %>
-									<td colspan="2" width="870">
+									<td colspan="3" width="870">
 										<textarea rows="3" style="resize:none" id="replyZone" placeholder="댓글을 작성해주세요!"></textarea>
 									</td>
 									<td style="text-align:center">
 										<button class="btn btn-dark" onclick="insertReply();"><i class="fas fa-comment-dots fa-lg"></i></button>
 									</td>
 								<% }else { %>
-									<td colspan="2" width="870">
+									<td colspan="3" width="870">
 										<textarea rows="3" style="resize:none" readonly>로그인 후 이용 가능한 서비스입니다</textarea>
 									</td>
 									<td style="text-align:center">
@@ -193,7 +193,7 @@ table {
 								<% } %>
 							</tr>
 							<tr>
-								<td colspan="3" height="20"></td>
+								<td colspan="4" height="20"></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -344,7 +344,30 @@ table {
 				console.log(renum);
 				console.log(remem);
 				
+			};
+			
+			// 댓글 수정
+			function updateReply(replyNo){
+	
+				console.log(replyNo);
 				
+				$.ajax({
+					url:"updateForm.po",
+					data:{
+						rno:replyNo
+					},
+					success:function(result){
+						if(result > 0) {
+							selectReplyList();
+							$("#replyZone").val("");
+						}
+					},error:function(){
+						console.log("댓글작성용 ajax 통신 실패");
+					}	
+				})
+			};
+
+				//$(.comment-view tbody).prop(textarea).val(replyContent)
 			};
 			
 			
@@ -354,8 +377,7 @@ table {
 				// 	return false;
 				// }
 			
-			
-			
+		
 			// 댓글 작성
 			function insertReply(){
 				$.ajax({
@@ -419,16 +441,17 @@ table {
 				            	result   +=  "<tr>"
 				                   + "<td></td>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-light' onclick='updateReply(" + list[i].replyNo + ");'><i class='fas fa-pen-alt'></i></button></td>"
 						           + "<td width='50' align='right'><button class='btn btn-sm btn-secondary' onclick='deleteReply(" + list[i].replyNo + ");'><i class='fas fa-trash-alt'></i></button></td>"
 						           + "</tr>"
-						           +  "<tr><td colspan='3' height='20'></td></tr>";
+						           +  "<tr><td colspan='4' height='20'></td></tr>";
 				              } else {
 				            	  result   += "<tr>"
 				                   + "<td></td>"
-						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply([" + list[i].replyNo + "," + list[i].writerNo + "])'><i class='far fa-angry'></i></button></td>"
+						           + "<td colspan='2' style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply([" + list[i].replyNo + "," + list[i].writerNo + "]);'><i class='far fa-angry'></i></button></td>"
 						           + "</tr>"
-						           +  "<tr><td colspan='3' height='20'></td></tr>";
+						           +  "<tr><td colspan='4' height='20'></td></tr>";
 				              }
 						}
 						$(".comment-view tbody").html(result);
@@ -505,6 +528,8 @@ table {
 					}
 				})
 			};
+			
+			
 					
 			
 		</script>
