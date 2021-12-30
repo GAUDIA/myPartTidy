@@ -1,1 +1,1 @@
-# myPartTidy
+# TidyGames
